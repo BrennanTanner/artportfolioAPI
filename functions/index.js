@@ -1,4 +1,4 @@
-
+const functions = require('firebase-functions');
 const express=require('express');
 const cors=require('cors');
 const collections = require('./config');
@@ -64,8 +64,9 @@ app.post('/deletepiece', async (req, res)=>{
   res.send({msg: 'Piece Deleted'});
 });
 
-app.listen(3000, ()=>console.log('Server Running'));
-// exports.app = functions.https.onRequest(app);
+// app.listen(3000, ()=>console.log('Server Running'));
+
+exports.app = functions.https.onRequest(app);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
