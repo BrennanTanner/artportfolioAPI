@@ -1,25 +1,29 @@
+
 const express=require('express');
 const cors=require('cors');
-const User=require('./config');
-const Piece=require('./config');
-const server=express();
-server.use(express.json());
-server.use(cors());
+const collections = require('./config');
+const Piece=collections.Pieces;
+const User=collections.Users;
+const app=express();
+app.use(express.json());
+app.use(cors());
+
 
 // artist info
-server.get('/artist', async (req, res)=>{
+app.get('/artist', async (req, res)=>{
   const snapshot = await User.get();
   const list = snapshot.docs.map((doc)=>({id: doc.id, ...doc.data()}));
   res.send(list);
 });
 
-server.post('/createartist', async (req, res)=>{
+app.post('/createartist', async (req, res)=>{
   const data=req.body;
   await User.add(data);
+  console.log(User);
   res.send({msg: 'User Added'});
 });
 
-server.post('/updateartist', async (req, res)=>{
+app.post('/updateartist', async (req, res)=>{
   const id = req.body.id;
   delete req.body.id;
   const data = req.body;
@@ -27,26 +31,26 @@ server.post('/updateartist', async (req, res)=>{
   res.send({msg: 'User Updated'});
 });
 
-server.post('/deleteartist', async (req, res)=>{
+app.post('/deleteartist', async (req, res)=>{
   const id = req.body.id;
   await User.doc(id).delete();
   res.send({msg: 'User Deleted'});
 });
 
 // pieces in portfolio
-server.get('/portfolio', async (req, res)=>{
+app.get('/portfolio', async (req, res)=>{
   const snapshot = await Piece.get();
   const list = snapshot.docs.map((doc)=>({id: doc.id, ...doc.data()}));
   res.send(list);
 });
 
-server.post('/createpiece', async (req, res)=>{
+app.post('/createpiece', async (req, res)=>{
   const data=req.body;
   await Piece.add(data);
   res.send({msg: 'Piece Added'});
 });
 
-server.post('/updatepiece', async (req, res)=>{
+app.post('/updatepiece', async (req, res)=>{
   const id = req.body.id;
   delete req.body.id;
   const data = req.body;
@@ -54,13 +58,14 @@ server.post('/updatepiece', async (req, res)=>{
   res.send({msg: 'Piece Updated'});
 });
 
-server.post('/deletepiece', async (req, res)=>{
+app.post('/deletepiece', async (req, res)=>{
   const id = req.body.id;
   await User.doc(id).delete();
   res.send({msg: 'Piece Deleted'});
 });
 
-// exports.app = functions.https.onRequest(server);
+app.listen(3000, ()=>console.log('Server Running'));
+// exports.app = functions.https.onRequest(app);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //

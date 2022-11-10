@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 const firebase = require('firebase');
+// const admin = require('firebase-admin');
 const firebaseConfig = {
   apiKey: 'AIzaSyB50vyAm8Xtj9Bo7dSBMwhb-rz_upZb4bo',
   authDomain: 'artportfolio-4701e.firebaseapp.com',
@@ -10,8 +11,12 @@ const firebaseConfig = {
   measurementId: 'G-FFDMLG198S',
 };
 firebase.initializeApp(firebaseConfig);
+// admin.initializeApp();
 const db = firebase.firestore();
-const User = db.collection('Users');
 const Piece = db.collection('Pieces');
-module.exports = User;
-module.exports = Piece;
+const User = db.collection('Users');
+
+module.exports = {
+  Users: User,
+  Pieces: Piece,
+};
