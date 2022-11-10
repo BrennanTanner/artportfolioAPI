@@ -1,8 +1,7 @@
-const functions = require('firebase-functions');
 const express=require('express');
 const cors=require('cors');
-const User=require('../config');
-const Piece=require('../config');
+const User=require('./config');
+const Piece=require('./config');
 const server=express();
 server.use(express.json());
 server.use(cors());
@@ -61,7 +60,7 @@ server.post('/deletepiece', async (req, res)=>{
   res.send({msg: 'Piece Deleted'});
 });
 
-exports.app = functions.https.onRequest(server);
+// exports.app = functions.https.onRequest(server);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
