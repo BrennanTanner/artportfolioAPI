@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const express=require('express');
 const cors=require('cors');
+const admin = require('firebase-admin');
 const collections = require('./config');
 const Piece=collections.Pieces;
 const User=collections.Users;
@@ -65,7 +66,7 @@ app.post('/deletepiece', async (req, res)=>{
 });
 
 // app.listen(3000, ()=>console.log('Server Running'));
-
+admin.initializeApp();
 exports.app = functions.https.onRequest(app);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
