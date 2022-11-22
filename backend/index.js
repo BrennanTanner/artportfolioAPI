@@ -1,5 +1,4 @@
 require('dotenv').config();
-const Parse = require("parse/node");
 const express = require('express');
 const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
