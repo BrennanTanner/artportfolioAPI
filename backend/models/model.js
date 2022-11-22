@@ -35,13 +35,19 @@ const artistSchema = mongoose.Schema({
          required: true,
          type: String,
       },
+      img: {
+         data: Buffer,
+         contentType: String,
+      },
       drafts: [
          {
             img: {
                data: Buffer,
                contentType: String,
             },
-            desc: String,
+            desc: {
+               type: String
+            },
          },
       ],
    }]
