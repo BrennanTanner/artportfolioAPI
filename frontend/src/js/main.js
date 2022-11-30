@@ -1,12 +1,18 @@
 import '../css/style.css';
+import AboutList from './aboutList';
+import ArtListing from './artListing';
+import ExternalServices from './externalServices';
 
-// import { loadHeaderFooter } from './uitils';
+import { loadHeaderFooter } from './utils';
 
-// loadHeaderFooter();
+loadHeaderFooter();
 
-fetch('https://artportfolio.onrender.com/api/getAll') 
-.then((response) => {
-  console.log(response)  
-}) .then((error) => {
-    console.log(error)
-});
+const dataSource = new ExternalServices();
+
+const myArt = new ArtListing(dataSource);
+
+const myAbout = new AboutList(dataSource);
+
+myArt.init()
+myAbout.init()
+
