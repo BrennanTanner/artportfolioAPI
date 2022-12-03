@@ -6,10 +6,14 @@ require('dotenv').config();
 
 router.use(express.json());
 
+// cloudinary configuration
 cloudinary.config({
+   cloud_name: process.env.CLOUD_NAME,
+   api_key: process.env.API_KEY,
+   api_secret: process.env.API_SECRET, 
    secure: true
  });
- 
+
 //new user method
 router.post('/newartist', async (req, res) => {
    const data = new Model({
