@@ -14,43 +14,45 @@ const artistSchema = mongoose.Schema({
       type: String,
    },
    aboutBody: String,
-   pieces: [{
-      title: {
-         required: true,
-         type: String,
-      },
-      // mainImg: {
-      //    required: true,
-      //    type: String,
-      // },
-      aboutBody: {
-         required: true,
-         type: String,
-      },
-      medium: {
-         required: true,
-         type: String,
-      },
-      isFavorite: {
-         required: true,
-         type: String,
-      },
-      img: {
-         data: Buffer,
-         contentType: String,
-      },
-      drafts: [
-         {
-            img: {
-               data: Buffer,
-               contentType: String,
-            },
-            desc: {
-               type: String
-            },
+   pieces: [
+      {
+         title: {
+            required: true,
+            type: String,
          },
-      ],
-   }]
+         // mainImg: {
+         //    required: true,
+         //    type: String,
+         // },
+         aboutBody: {
+            required: true,
+            type: String,
+         },
+         medium: {
+            required: true,
+            type: String,
+         },
+         isFavorite: {
+            required: true,
+            type: String,
+         },
+         img: {
+            required: true,
+            type: String,
+         },
+         drafts: [
+            {
+               img: {
+                  data: Buffer,
+                  contentType: String,
+               },
+               desc: {
+                  type: String,
+               },
+            },
+         ],
+      },
+   ],
 });
 
 module.exports = mongoose.model('Data', artistSchema);

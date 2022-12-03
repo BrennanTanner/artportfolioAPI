@@ -16,3 +16,8 @@ const myAbout = new AboutList(dataSource);
 myArt.init()
 myAbout.init()
 
+// document.querySelector('#img')
+// .addEventListener('click', (e) => {
+//   e.preventDefault();
+//     dataSource.checkout();
+// });

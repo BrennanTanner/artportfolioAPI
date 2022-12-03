@@ -1,23 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./src/js/main.js" type="module"></script>
-    <link rel="stylesheet" href="./src/css/">
-    <title>Artist Portfolio</title>
-  </head>
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="./src/js/main.js" type="module"></script>
+      <link rel="stylesheet" href="./src/css/" />
+      <title>Artist Portfolio</title>
+   </head>
 
-  <header class="divider" id="main-header"></header>
+   <header class="divider" id="main-header">
+   
+   </header>
 
-  <body>
-    <!-- <div id="app"></div> -->
+   <body>
+
+      <div class="card">
+         <h1> Upload Image </h1>
+         <div class="box"></div>
+         <div class="input-box">
+           <label for="file">Choose File</label>
+         <input type="file" class="input" id="file">
+         </div>
+       </div>
+
+      <br><br><br>1.
+      <input
+         type="file"
+         id="input_img"
+         onchange="fileChange()"
+         accept="image/*"
+      />
+      2. <input type="file" onchange="encodeImageFileAsURL(this)" />
+      <script>
+         async function encodeImageFileAsURL(element) {
+
+            var file = element.files[0];
+
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+              return reader.result
+            };
+
+            reader.readAsDataURL(file);
+
+            console.log('Readeronload',reader.onloadend);
+            console.log('file',file );
+            let response = await fetch(
+               'https://api.imgbb.com/1/upload?expiration=600&key=3f8b07a85dabe29fb678437260448a2b&image=' +
+                  reader.result,
+               {
+                  method: 'POST',
+                  mimeType: 'multipart/form-data',
+               }
+            );
+            console.log(response);
+         }
+
+         function fileChange() {
+            var file = document.getElementById('input_img');
+            var form = new FormData();
+            form.append('image', file.files[0]);
+
+            var settings = {
+               method: 'POST',
+               timeout: 0,
+               processData: false,
+               mimeType: 'multipart/form-data',
+               contentType: false,
+               data: form,
+            };
+
+            let response = fetch(
+               'https://api.imgbb.com/1/upload?expiration=600&key=3f8b07a85dabe29fb678437260448a2b&image=data',
+               settings
+            );
+         }
+      </script>
+
+      <!-- <div id="app"></div> -->
       <div class="art-collection">
-          <h1 class="art-title"></h1>
-          <p class="art-medium"></p>
-          <p class="art-summary"></p>
+         <h1 class="art-title"></h1>
+         <p class="art-medium"></p>
+         <p class="art-summary"></p>
       </div>
-  </body>
-  <footer class="divider" id="main-footer"></footer>
+   </body>
+   <footer class="divider" id="main-footer"></footer>
 </html>
