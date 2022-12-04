@@ -1,27 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const Model = require('../models/model');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
 require('dotenv').config();
 
-router.use(express.json());
-
-// cloudinary configuration
-cloudinary.config({
-   cloud_name: process.env.CLOUD_NAME,
-   api_key: process.env.API_KEY,
-   api_secret: process.env.API_SECRET
- });
-
 //new user method
-router.post('/newartist', async (req, res) => {
+router.post('/newartist', upload.single('image'), async (req, res) => {
+   // Upload image to cloudinary
+   const result = await cloudinary.uploader.upload(req.file.path);
+
+   // Create new user
    const data = new Model({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      degree: req.body.degree,
+      firstN: req.body.firstN,
+      lastN: req.body.lastN,
+      aboutMe: req.body.aboutMe,
       pieces: req.body.pieces,
+      profileImg: result.secure_url,
    });
- 
+
    try {
       const dataToSave = await data.save();
       res.status(200).json(dataToSave);
@@ -31,34 +28,44 @@ router.post('/newartist', async (req, res) => {
 });
 
 //add a new piece method
-router.patch('/newpiece/:id', async (req, res) => {
+router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
    try {
       const id = req.params.id;
-      const newpiece = req.body;
+      const oldPiece = req.body;
+
+      const pieceImages = {
+         img: "", 
+         drafts: [],
+      };
+
+      const newPiece = {...oldPiece, ...pieceImages };
+
+      const newDraft = {
+         img: "",
+      }
+
+      // Upload image to cloudinary
+
+      for (var i = 0; i < req.files.length; i++) {
+         var localFilePath = req.files[i].path;
+         const cloudResult = await cloudinary.uploader.upload(localFilePath);
+         if(i==0){
+            newPiece.img = cloudResult.secure_url; 
+            console.log("1 image uploaded");
+         }
+         else {
+            newPiece.drafts.push(newDraft);
+            newPiece.drafts[i-1].img = cloudResult.secure_url;
+            
+            console.log(i+1+" image uploaded");
+         }
+         
+      }
+      
       const pieces = await Model.findById(id);
-      const imagePath = req.body.img;
 
-      console.log(req.body.img);
-      const options = {
-         use_filename: true,
-         unique_filename: false,
-         overwrite: true,
-       };
-   
-       try {
-         // Upload the image
-         const result = await cloudinary.uploader.upload(imagePath, options);
-         newpiece.img = result.secure_url;
-         console.log(result);
-      
-       } catch (error) {
-         console.error(error);
-       }
-
-      
-      pieces.pieces.push(newpiece);
+      pieces.pieces.push(newPiece);
       const result = await pieces.save();
-
       res.send(result);
    } catch (error) {
       res.status(400).json({ message: error.message });

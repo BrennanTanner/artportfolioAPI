@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 
 const artistSchema = mongoose.Schema({
-   firstName: {
+   firstN: {
       required: true,
       type: String,
    },
-   lastName: {
+   lastN: {
       required: true,
       type: String,
    },
-   degree: {
+   profileImg: {
+      required: true,
+      type: String,
+   },
+   aboutMe: {
       required: true,
       type: String,
    },
@@ -43,12 +47,9 @@ const artistSchema = mongoose.Schema({
          drafts: [
             {
                img: {
-                  data: Buffer,
-                  contentType: String,
-               },
-               desc: {
                   type: String,
                },
+
             },
          ],
       },
