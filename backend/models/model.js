@@ -24,10 +24,6 @@ const artistSchema = mongoose.Schema({
             required: true,
             type: String,
          },
-         // mainImg: {
-         //    required: true,
-         //    type: String,
-         // },
          aboutBody: {
             required: true,
             type: String,
