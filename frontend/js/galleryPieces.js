@@ -10,9 +10,8 @@ export default class ArtListing {
         this.setLocalStorageId(authorId);
 
         const authorData = await this.dataSource.getOwnersData(authorId);
-        console.log(authorData)
-
         const template = document.querySelector('.art-collection')
+        console.log(authorData)
 
         authorData.pieces.forEach((element) => {
             console.log(element)
@@ -30,6 +29,10 @@ export default class ArtListing {
         artTitle.textContent = element.title;
         artMedium.textContent = element.medium;
         artSummary.textContent = element.aboutBody;
+
+        element.drafts.forEach((element) => {
+            console.log(element)
+        })
 
         artSection.appendChild(artTitle)
         artSection.appendChild(artMedium)

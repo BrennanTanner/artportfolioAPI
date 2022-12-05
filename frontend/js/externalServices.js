@@ -23,6 +23,9 @@ export default class ExternalServices {
          .then(convertToJson)
          .then((data) => data);
    }
+   
+
+   
 
   //  async checkout() {
   //     const formElement = document.forms['img'];
