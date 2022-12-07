@@ -44,10 +44,6 @@ router.post('/login', upload.single('image'), async (req, response) => {
 
   const user = await Model.findOne({ username: username });
 
-  console.log("User password: "+user.password);
-
-  console.log("password: "+password);
-
   bcrypt.compare(password, user.password, function(err, res) {
    if (err){
      // handle error
@@ -61,32 +57,6 @@ router.post('/login', upload.single('image'), async (req, response) => {
    }
  });
 
-    // .then(user => {
-      
-   //     if (!user) {
-   //       req.flash('error', 'Invalid email or password.');
-   //       return res.redirect('/login');
-   //     }
-   //     bcrypt
-   //       .compare(password, user.password)
-   //       .then(doMatch => {
-   //         if (doMatch) {
-   //           req.session.isLoggedIn = true;
-   //           req.session.user = user;
-   //           return req.session.save(err => {
-   //             console.log(err);
-   //             res.redirect('/');
-   //           });
-   //         }
-   //         req.flash('error', 'Invalid email or password.');
-   //         res.redirect('/login');
-   //       })
-   //       .catch(err => {
-   //         console.log(err);
-   //         res.redirect('/login');
-   //       });
-   //   })
-   //   .catch(err => console.log(err));
  });
 
 //add a new piece method
@@ -102,7 +72,7 @@ router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
 
       const newPiece = {...oldPiece, ...pieceImages };
 
-      const newDraft = {
+      var newDraft = {
          img: "",
       }
 
@@ -111,17 +81,16 @@ router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
       for (var i = 0; i < req.files.length; i++) {
          var localFilePath = req.files[i].path;
          const cloudResult = await cloudinary.uploader.upload(localFilePath);
+         var newDraft = {
+            img: "",
+         }
          if(i==0){
-            newPiece.img = cloudResult.secure_url; 
-            console.log("1 image uploaded");
+            newPiece.img = cloudResult.secure_url;     
          }
          else {
+            newDraft.img = cloudResult.secure_url;
             newPiece.drafts.push(newDraft);
-            newPiece.drafts[i-1].img = cloudResult.secure_url;
-            
-            console.log(i+1+" image uploaded");
          }
-         
       }
       
       const pieces = await Model.findById(id);
