@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/Artboard 3.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../css/style.css" />
+      <script src="./js/main.js" type="module"></script>
+      <title>Artist Portfolio</title>
+   </head>
+
+   <header class="divider" id="main-header"></header>
+
+   <body>
+      <section>
+         <h2>New User Registration</h2>
+      <form name="newUser">
+         <fieldset>
+           <legend>Personal Info</legend>
+ 
+           <div class="personalInfo">
+           <label for="firstN" >First name</label><br>
+         <input type="text" name="firstN" required ><br>
+         <label for="lastN">Last name</label><br>
+         <input type="text" name="lastN" required ><br>
+       </div>
+         </fieldset>
+         
+         <fieldset>
+           <legend>About Me</legend>
+           <label for="aboutMe" id="aboutMeLabel">Write about yourself</label><br>
+           <textarea id="aboutMe" name="aboutMe" rows="6" cols="60"></textarea>
+
+         </fieldset>
+ 
+         <fieldset>
+           <legend>Profile Picture</legend>
+           <input type="file" id="profilePicture" name="image"
+           accept="image/png, image/jpeg" required /><br>
+         </fieldset>
+ 
+ 
+         <button type="submit" id="checkoutSubmit">Checkout</button>
+     </form>
+   </section>
+
+   </body>
+   <footer class="divider" id="main-footer"></footer>
+</html>
