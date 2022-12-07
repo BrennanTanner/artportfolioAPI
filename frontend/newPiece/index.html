@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="./public/Artboard 3.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="./js/main.js" type="module"></script>
+      <link rel="stylesheet" href="./src/css/" />
+      <title>Artist Portfolio</title>
+   </head>
+
+   <header class="divider" id="main-header"></header>
+
+   <body>
+      <section>
+         <h2>New Piece</h2>
+         <form name="newPiece">
+            <fieldset>
+               <legend>Main Image</legend>
+               <input
+                  type="file"
+                  id="mainPicture"
+                  name="image"
+                  accept="image/png, image/jpeg"
+                  required
+               /><br />
+            </fieldset>
+
+            <fieldset>
+               <div id="draftSection">
+                  <legend>Draft Images</legend>
+                  <input
+                     type="file"
+                     id="draftImage"
+                     name="image"
+                     accept="image/png, image/jpeg"
+                     required
+                  /><br />
+               </div>
+               <div onclick="addDraftElement()" id="addDraft"><h3>+</h3></div>
+               <div id="draftLimit" style="color: red; display: none">
+                  <p>You can only have 5 images!</p>
+               </div>
+            </fieldset>
+
+            <button type="submit" id="checkoutSubmit">Checkout</button>
+         </form>
+      </section>
+   </body>
+   <script>
+      draftSection = document.getElementById('draftSection');
+      draftUpload = document.getElementById('addDraft');
+      draftMessage = document.getElementById('draftLimit');
+      var counter = 0;
+      function addDraftElement() {
+         if (counter == 4) {
+            draftMessage.style.display = 'inline';
+         } else {
+            draftSection.innerHTML += `<input type="file" id="draftImage" name="image" accept="image/png, image/jpeg" required/><br />`;
+            counter++;
+         }
+      }
+   </script>
+   <footer class="divider" id="main-footer"></footer>
+</html>
