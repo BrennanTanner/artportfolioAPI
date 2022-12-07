@@ -7,6 +7,11 @@ function convertToText(res) {
     }
   }
 
+  export async function getUrlId(URL) {
+    
+    return template;
+  
+  }
 
 export async function loadTemplate(path) {
     const html = await fetch(path).then(convertToText);
