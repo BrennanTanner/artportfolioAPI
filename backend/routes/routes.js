@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Model = require('../models/model');
 const cloudinary = require('../utils/cloudinary');
+const bcrypt = require('bcryptjs');
 const upload = require('../utils/multer');
+const { model } = require('mongoose');
 require('dotenv').config();
 
 //new user method
@@ -10,10 +12,18 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
    // Upload image to cloudinary
    const result = await cloudinary.uploader.upload(req.file.path);
 
+   const password = req.body.password;
+   
+   console.log("password: "+password);
+
+   const hashedPassword = await bcrypt.hash(password, 12);
+   console.log("hashed password: "+hashedPassword);
    // Create new user
    const data = new Model({
       firstN: req.body.firstN,
       lastN: req.body.lastN,
+      username: req.body.username,
+      password: hashedPassword,
       aboutMe: req.body.aboutMe,
       pieces: req.body.pieces,
       profileImg: result.secure_url,
@@ -26,6 +36,58 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
       res.status(400).json({ message: error.message });
    }
 });
+
+//login
+router.post('/login', upload.single('image'), async (req, response) => {
+   const username = req.body.username;
+   const password = req.body.password;
+
+  const user = await Model.findOne({ username: username });
+
+  console.log("User password: "+user.password);
+
+  console.log("password: "+password);
+
+  bcrypt.compare(password, user.password, function(err, res) {
+   if (err){
+     // handle error
+   }
+   if (res) {
+     // Send JWT
+     return response.json({success: true, message: 'passwords match'});
+   } else {
+     // response is OutgoingMessage object that server response http request
+     return response.json({success: false, message: 'passwords do not match'});
+   }
+ });
+
+    // .then(user => {
+      
+   //     if (!user) {
+   //       req.flash('error', 'Invalid email or password.');
+   //       return res.redirect('/login');
+   //     }
+   //     bcrypt
+   //       .compare(password, user.password)
+   //       .then(doMatch => {
+   //         if (doMatch) {
+   //           req.session.isLoggedIn = true;
+   //           req.session.user = user;
+   //           return req.session.save(err => {
+   //             console.log(err);
+   //             res.redirect('/');
+   //           });
+   //         }
+   //         req.flash('error', 'Invalid email or password.');
+   //         res.redirect('/login');
+   //       })
+   //       .catch(err => {
+   //         console.log(err);
+   //         res.redirect('/login');
+   //       });
+   //   })
+   //   .catch(err => console.log(err));
+ });
 
 //add a new piece method
 router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
