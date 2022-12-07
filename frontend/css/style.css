@@ -1,4 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 
+body {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.nav-title {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+
+.image-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.gallery-image {
+  width: 20%;
+}
 
 .art-collection {
   display: flex;

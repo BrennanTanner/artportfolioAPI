@@ -11,7 +11,16 @@ export default class ArtListing {
 
         const authorData = await this.dataSource.getOwnersData(authorId);
         const template = document.querySelector('.art-collection')
+        const headerTemplate = document.querySelector('.divider')
 
+        const createHeaderTitle = document.createElement('h1');
+        createHeaderTitle.textContent = authorData.firstN + " " + authorData.lastN;
+        createHeaderTitle.className = "nav-title"
+        headerTemplate.appendChild(createHeaderTitle);
+
+
+        createUsersTitle(authorData)
+        
         authorData.forEach((element) => {
             console.log(element)
             template.append(this.artPieceTemplate(element))
