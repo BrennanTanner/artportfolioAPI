@@ -16,7 +16,8 @@ export default class ExternalServices {
 
    async getOwnersData() {
 
-      const id = getIdFromUrl();
+
+      const id = sessionStorage.getItem('_id');
       
       return await fetch(baseURL + `api/get/${id}`)
          .then(convertToJson)
