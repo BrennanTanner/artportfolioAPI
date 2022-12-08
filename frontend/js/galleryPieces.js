@@ -5,7 +5,7 @@ export default class ArtListing {
 
     async init() {
         const list = await this.dataSource.getOwnersData();
-        const authorId = list[0]._id
+        const authorId =  sessionStorage.getItem('_id');
 
         const template = document.querySelector('.art-collection')
 

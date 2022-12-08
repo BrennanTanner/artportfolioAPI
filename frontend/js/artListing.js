@@ -7,7 +7,7 @@ export default class ArtListing {
 
         const list = await this.dataSource.getOwnersData();
 
-        const authorId = list._id
+        const authorId = sessionStorage.getItem('_id');
 
         const template = document.querySelector('.art-collection')
         const headerTemplate = document.querySelector('.divider')
@@ -18,7 +18,7 @@ export default class ArtListing {
         headerTemplate.appendChild(createHeaderTitle);
 
 
-        createUsersTitle(list)
+        //createUsersTitle(list);
         
         list.pieces.forEach((element) => {
 
