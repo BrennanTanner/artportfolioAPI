@@ -20,18 +20,27 @@ export default class ArtListing {
         let artSection = document.createElement('div');
         let artTitle = document.createElement('h1');
         let artMedium = document.createElement('p');
+        let artSummaryTitle = document.createElement('h3')
         let artSummary = document.createElement('p');
+        let imageArea = document.createElement('div');
+
         artSection.className = "art-items";
         artTitle.textContent = element.title;
-        artMedium.textContent = element.medium;
+        artSummaryTitle.textContent = "Summary"
+        artMedium.textContent = `Medium: ${element.medium}`;
         artSummary.textContent = element.aboutBody;
+        imageArea.className = "image-content"
 
         element.drafts.forEach((element) => {
-            console.log(element)
+            let artImage = document.createElement('img');
+            artImage.src = element.img
+            artImage.className = "gallery-image"
+            imageArea.appendChild(artImage)
         })
-
         artSection.appendChild(artTitle)
+        artSection.appendChild(imageArea)
         artSection.appendChild(artMedium)
+        artSection.appendChild(artSummaryTitle)
         artSection.appendChild(artSummary)
 
         return artSection;

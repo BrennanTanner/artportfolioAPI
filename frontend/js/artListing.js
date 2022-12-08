@@ -10,8 +10,18 @@ export default class ArtListing {
         const authorId = list._id
 
         const template = document.querySelector('.art-collection')
+        const headerTemplate = document.querySelector('.divider')
 
+        const createHeaderTitle = document.createElement('h1');
+        createHeaderTitle.textContent = list.firstN + " " + list.lastN;
+        createHeaderTitle.className = "nav-title"
+        headerTemplate.appendChild(createHeaderTitle);
+
+
+        createUsersTitle(list)
+        
         list.pieces.forEach((element) => {
+
             console.log(element)
             template.append(this.artPieceTemplate(element))
         })

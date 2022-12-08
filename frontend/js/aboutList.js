@@ -16,15 +16,12 @@ export default class AboutList {
 
     artPieceTemplate(element) {
         let aboutSection = document.createElement('div');
-        let aboutPerson = document.createElement('h1');
         let aboutProfile = document.createElement('img');
         let aboutInfo = document.createElement('p');
         aboutSection.className = "about";
-        aboutPerson.textContent = element.firstN + element.lastN;
         aboutProfile.src = element.profileImg;
         aboutInfo.textContent = element.aboutMe;
 
-        aboutSection.appendChild(aboutPerson)
         aboutSection.appendChild(aboutProfile)
         aboutSection.appendChild(aboutInfo)
 
