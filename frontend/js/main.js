@@ -3,12 +3,10 @@ import AboutList from './aboutList';
 import ArtListing from './artListing';
 import GalleryPieces from './galleryPieces'
 import ExternalServices from './externalServices';
+import { loadHeaderFooter, checkURL } from './utils';
 
-import { loadHeaderFooter, checkURLforID } from './utils';
-
+checkURL();
 loadHeaderFooter();
-
-checkURLforID();
 
 const dataSource = new ExternalServices();
 
