@@ -13,11 +13,11 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
    const result = await cloudinary.uploader.upload(req.file.path);
 
    const password = req.body.password;
-   
-   console.log("password: "+password);
+
+   console.log('password: ' + password);
 
    const hashedPassword = await bcrypt.hash(password, 12);
-   console.log("hashed password: "+hashedPassword);
+   console.log('hashed password: ' + hashedPassword);
    // Create new user
    const data = new Model({
       firstN: req.body.firstN,
@@ -42,22 +42,24 @@ router.post('/login', upload.single('image'), async (req, response) => {
    const username = req.body.username;
    const password = req.body.password;
 
-  const user = await Model.findOne({ username: username });
+   const user = await Model.findOne({ username: username });
 
-  bcrypt.compare(password, user.password, function(err, res) {
-   if (err){
-     // handle error
-   }
-   if (res) {
-     // Send JWT
-     return response.json({success: true, message: 'passwords match'});
-   } else {
-     // response is OutgoingMessage object that server response http request
-     return response.json({success: false, message: 'passwords do not match'});
-   }
- });
-
- });
+   bcrypt.compare(password, user.password, function (err, res) {
+      if (err) {
+         // handle error
+      }
+      if (res) {
+         // Send JWT
+         return response.json({ success: true, _id: user._id,  message: 'passwords match' });
+      } else {
+         // response is OutgoingMessage object that server response http request
+         return response.json({
+            success: false,
+            message: 'passwords do not match'
+         });
+      }
+   });
+});
 
 //add a new piece method
 router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
@@ -66,15 +68,15 @@ router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
       const oldPiece = req.body;
 
       const pieceImages = {
-         img: "", 
+         img: '',
          drafts: [],
       };
 
-      const newPiece = {...oldPiece, ...pieceImages };
+      const newPiece = { ...oldPiece, ...pieceImages };
 
       var newDraft = {
-         img: "",
-      }
+         img: '',
+      };
 
       // Upload image to cloudinary
 
@@ -82,17 +84,16 @@ router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
          var localFilePath = req.files[i].path;
          const cloudResult = await cloudinary.uploader.upload(localFilePath);
          var newDraft = {
-            img: "",
-         }
-         if(i==0){
-            newPiece.img = cloudResult.secure_url;     
-         }
-         else {
+            img: '',
+         };
+         if (i == 0) {
+            newPiece.img = cloudResult.secure_url;
+         } else {
             newDraft.img = cloudResult.secure_url;
             newPiece.drafts.push(newDraft);
          }
       }
-      
+
       const pieces = await Model.findById(id);
 
       pieces.pieces.push(newPiece);

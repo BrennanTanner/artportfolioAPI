@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/Artboard 3.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../css/style.css" />
+      <script src="./js/main.js" type="module"></script>
+      <script src="../js/login.js" type="module"></script>
+      <title>Artist Portfolio</title>
+   </head>
+
+   <header class="divider" id="main-header"></header>
+
+   <body>
+      <section>
+         <h2>Login</h2>
+         <form name="login" onsubmit="sendData()" id="login">
+            <fieldset>
+               <div class="loginArea">
+                  <label for="username">Username</label><br />
+                  <input
+                     type="text"
+                     id="username"
+                     name="username"
+                     required
+                  /><br />
+                  <label for="password">Password</label><br />
+                  <input
+                     type="password"
+                     id="password"
+                     name="password"
+                     required
+                  />
+               </div>
+            </fieldset>
+
+            <input type="submit" id="checkoutSubmit"></input>
+         </form>
+      </section>
+   </body>
+   <footer class="divider" id="main-footer"></footer>
+</html>
