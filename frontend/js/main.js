@@ -4,9 +4,11 @@ import ArtListing from './artListing';
 import GalleryPieces from './galleryPieces'
 import ExternalServices from './externalServices';
 
-import { loadHeaderFooter } from './utils';
+import { loadHeaderFooter, checkURLforID } from './utils';
 
 loadHeaderFooter();
+
+checkURLforID();
 
 const dataSource = new ExternalServices();
 

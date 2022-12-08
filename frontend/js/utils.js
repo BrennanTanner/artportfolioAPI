@@ -7,10 +7,16 @@ function convertToText(res) {
     }
   }
 
-  export async function getUrlId(URL) {
-    
-    return template;
-  
+  export function checkURLforID() {
+    var pathArray = window.location.pathname.split('/');
+
+    console.log(pathArray[0]);
+    if (!pathArray[0]){
+      window.location.replace("/login/index.html");
+    }
+    else {
+      console.log(pathArray[0]);
+    }
   }
 
 export async function loadTemplate(path) {
