@@ -1,3 +1,5 @@
+import { getIdFromUrl } from "./utils";
+
 const baseURL = 'https://artportfolio.onrender.com/';
 const imageURL = '';
 
@@ -12,13 +14,10 @@ async function convertToJson(res) {
 export default class ExternalServices {
    constructor() {}
 
-   async getData() {
-      return await fetch(baseURL + `api/getAll`)
-         .then(convertToJson)
-         .then((data) => data);
-   }
+   async getOwnersData() {
 
-   async getOwnersData(id) {
+      const id = getIdFromUrl();
+      
       return await fetch(baseURL + `api/get/${id}`)
          .then(convertToJson)
          .then((data) => data);

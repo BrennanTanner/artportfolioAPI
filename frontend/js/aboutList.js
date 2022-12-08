@@ -1,13 +1,15 @@
+import { getIdFromUrl } from "./utils";
+
 export default class AboutList {
     constructor(dataSource) {
         this.dataSource = dataSource;
     }
     async init() {
-        const id  = localStorage.getItem('author');
+        const id  = getIdFromUrl();
         const list = await this.dataSource.getOwnersData(id);
-        console.log(list)
 
-        const template = document.querySelector('.about-collection')
+        const template = document.querySelector('.aboutCollection');
+        console.log(template);
         template.append(this.artPieceTemplate(list))
         
     }

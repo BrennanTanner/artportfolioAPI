@@ -5,19 +5,18 @@
       <link rel="icon" type="image/svg+xml" href="/Artboard 3.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="../css/style.css" />
-      <script src="./js/main.js" type="module"></script>
-      <script src="../js/login.js" type="module"></script>
+      <script src="../js/admin.js" type="module"></script>
       <title>Artist Portfolio</title>
    </head>
 
    <header class="divider" id="main-header"></header>
 
    <body>
-      <section>
+      <section id="loginArea">
          <h2>Login</h2>
          <form name="login" onsubmit="sendData()" id="login">
             <fieldset>
-               <div class="loginArea">
+               <div>
                   <label for="username">Username</label><br />
                   <input
                      type="text"
@@ -35,8 +34,12 @@
                </div>
             </fieldset>
 
-            <input type="submit" id="checkoutSubmit"></input>
+            <input type="submit" id="loginSubmit"></input>
          </form>
+      </section>
+
+      <section class="loggedinMessage">
+         <p>Or you can<a href="../newUser/index.html">Create an Account</a> here</p>
       </section>
    </body>
    <footer class="divider" id="main-footer"></footer>

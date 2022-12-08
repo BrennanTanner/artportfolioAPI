@@ -4,16 +4,12 @@ export default class ArtListing {
     }
 
     async init() {
-        const list = await this.dataSource.getData();
+        const list = await this.dataSource.getOwnersData();
         const authorId = list[0]._id
 
-        this.setLocalStorageId(authorId);
-
-        const authorData = await this.dataSource.getOwnersData(authorId);
         const template = document.querySelector('.art-collection')
-        console.log(authorData)
 
-        authorData.pieces.forEach((element) => {
+        list.pieces.forEach((element) => {
             console.log(element)
             template.append(this.artPieceTemplate(element))
         })
