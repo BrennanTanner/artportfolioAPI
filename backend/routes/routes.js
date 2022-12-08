@@ -62,7 +62,7 @@ router.post('/login', upload.single('image'), async (req, response) => {
 });
 
 //add a new piece method
-router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
+router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
    try {
       const id = req.params.id;
       const oldPiece = req.body;

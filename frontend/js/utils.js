@@ -60,6 +60,21 @@ export function getIdFromUrl() {
    }
 }
 
+export async function imageCounter(){
+  draftSection = document.getElementById('draftSection');
+  draftUpload = document.getElementById('addDraft');
+  draftMessage = document.getElementById('draftLimit');
+  var counter = 0;
+  function addDraftElement() {
+     if (counter == 4) {
+        draftMessage.style.display = 'inline';
+     } else {
+        draftSection.innerHTML += `<input type="file" id="draftImage" name="image" accept="image/png, image/jpeg" required/><br />`;
+        counter++;
+     }
+  }
+}
+
 export async function loadHeaderFooter() {
    const loggedIn = checkStatus();
 
