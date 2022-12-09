@@ -1,52 +1,56 @@
 export default class ArtListing {
-    constructor(dataSource) {
-        this.dataSource = dataSource;
-    }
+   constructor(dataSource) {
+      this.dataSource = dataSource;
+   }
 
-    async init() {
+   async init() {
+      const list = await this.dataSource.getOwnersData();
 
-        const list = await this.dataSource.getOwnersData();
+      const authorId = sessionStorage.getItem('_id');
 
-        const authorId = sessionStorage.getItem('_id');
+      const template = document.querySelector('.art-collection');
 
-        const template = document.querySelector('.art-collection')
-        const headerTemplate = document.querySelector('.divider')
+      const headerTemplate = document.querySelector('.divider');
 
-        const createHeaderTitle = document.createElement('h1');
-        createHeaderTitle.textContent = list.firstN + " " + list.lastN;
-        createHeaderTitle.className = "nav-title"
-        headerTemplate.appendChild(createHeaderTitle);
+      const createHeaderTitle = document.createElement('h1');
+      createHeaderTitle.textContent = list.firstN + ' ' + list.lastN;
+      createHeaderTitle.className = 'nav-title';
 
+      if (this.dataSource.pieces) {
+         headerTemplate.appendChild(createHeaderTitle);
+      }
+      else{
+       
+        template.innerHTML=`
+        <h2>Looks like there's nothing here!</h2>
+        <p>Try clicking the "+" to add a piece and start your portfolio</p>`;
+      }
 
-        //createUsersTitle(list);
-        
-        list.pieces.forEach((element) => {
+      //createUsersTitle(list);
 
-            console.log(element)
-            template.append(this.artPieceTemplate(element))
-        })
-        
-    }
+      list.pieces.forEach((element) => {
+         template.append(this.artPieceTemplate(element));
+      });
+   }
 
-    artPieceTemplate(element) {
-        let artSection = document.createElement('div');
-        let artTitle = document.createElement('h1');
-        let artMedium = document.createElement('p');
-        let artSummary = document.createElement('p');
-        artSection.className = "art-items";
-        artTitle.textContent = element.title;
-        artMedium.textContent = element.medium;
-        artSummary.textContent = element.aboutBody;
+   artPieceTemplate(element) {
+      const scale = 'w_250,h_300,c_fill';
 
-        artSection.appendChild(artTitle)
-        artSection.appendChild(artMedium)
-        artSection.appendChild(artSummary)
+      var UrlArray = element.img.split('/');
+      UrlArray.splice(6, 0, scale);
+      const scaledUrl = UrlArray.join('/');
+      console.log('img path ' + scaledUrl);
+      let artSection = document.createElement('div');
+      let artImg = document.createElement('img');
+      artSection.className = 'art-items';
+      artImg.setAttribute('src', scaledUrl);
+      artImg.setAttribute('class', 'favoriteImg');
+      artSection.appendChild(artImg);
 
-        return artSection;
-    }
+      return artSection;
+   }
 
-
-    setLocalStorageId(id) {
-        localStorage.setItem('author', id)
-    }
+   setLocalStorageId(id) {
+      localStorage.setItem('author', id);
+   }
 }
