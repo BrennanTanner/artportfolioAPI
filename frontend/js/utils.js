@@ -78,14 +78,40 @@ export async function loadHeaderFooter() {
    renderWithTemplate(footer, footerElement);
 
    if (loggedIn) {
-      document.getElementById('userControls').style.display = 'inline';
+      document.getElementById('userControls').style.display = 'block';
       document.getElementById('loginButton').style.display = 'none';
 
-      document.getElementById('logoutButton').style.display = 'inline';
+      document.getElementById('logoutButton').style.display = 'block';
       document
          .getElementById('logoutButton')
          .addEventListener('click', function () {
             logout();
          });
    }
+
+   const menu = document.querySelector(".menu");
+const menuItems = document.querySelectorAll(".menuItem");
+const hamburger= document.querySelector(".hamburger");
+const closeIcon= document.querySelector(".closeIcon");
+const menuIcon = document.querySelector(".menuIcon");
+
+function toggleMenu() {
+   if (menu.classList.contains("showMenu")) {
+     menu.classList.remove("showMenu");
+     closeIcon.style.display = "none";
+     menuIcon.style.display = "block";
+   } else {
+     menu.classList.add("showMenu");
+     closeIcon.style.display = "block";
+     menuIcon.style.display = "none";
+   }
+ }
+
+ hamburger.addEventListener("click", toggleMenu);
+
+menuItems.forEach( 
+  function(menuItem) { 
+    menuItem.addEventListener("click", toggleMenu);
+  }
+)
 }
