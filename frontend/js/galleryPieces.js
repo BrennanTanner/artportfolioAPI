@@ -25,8 +25,6 @@ export default class ArtListing {
         let artMedium = document.createElement('p');
         let artSummary = document.createElement('p');
         let imageArea = document.createElement('div');
-        let singleImage = document.createElement('img')
-        let image 
 
         artSection.className = "art-items";
         artMainImg.setAttribute("src", element.img);
@@ -35,10 +33,8 @@ export default class ArtListing {
         artSummary.textContent = element.aboutBody;
         imageArea.className = "gallery-image-content"
 
-        singleImage.src = element.img;
         
 
-        imageArea.appendChild(singleImage);
         element.drafts.forEach((element) => {
             let artImage = document.createElement('img');
             artImage.src = element.img

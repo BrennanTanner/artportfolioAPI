@@ -53,16 +53,16 @@ export function appendFormLink(form) {
 
 export function getIdFromUrl() {
    var pathArray = window.location.pathname.split('/');
-  let i = 1;
-   if (pathArray[i]== "Art-Portfolio"){
-      i++
-   }
+//   let i = 1;
+//    if (pathArray[i]== "Art-Portfolio"){
+//       i++
+//    }
 
-   if (pathArray[i] == 'about' || pathArray[1] == 'gallery') {
+   if (pathArray[1] == 'about' || pathArray[1] == 'gallery') {
       const id = sessionStorage.getItem('_id');
-      return pathArray[i];
+      return pathArray[1];
    } else {
-      return pathArray[i];
+      return pathArray[1];
    }
 }
 
