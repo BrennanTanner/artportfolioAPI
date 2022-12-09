@@ -12,6 +12,7 @@ import {
 
 checkURL();
 loadHeaderFooter();
+
 const path = getIdFromUrl();
 
 const dataSource = new ExternalServices();

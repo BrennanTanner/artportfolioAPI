@@ -6,31 +6,45 @@ export default class ArtListing {
    async init() {
       const list = await this.dataSource.getOwnersData();
 
-      const authorId = sessionStorage.getItem('_id');
+      //const authorId = sessionStorage.getItem('_id');
 
       const template = document.querySelector('.art-collection');
 
       const headerTemplate = document.querySelector('.divider');
 
       const createHeaderTitle = document.createElement('h1');
-      createHeaderTitle.textContent = list.firstN + ' ' + list.lastN;
+   
+      
       createHeaderTitle.className = 'nav-title';
+      let status = sessionStorage.getItem('loggedIn');
+      
+      headerTemplate.appendChild(createHeaderTitle);
 
-      if (this.dataSource.pieces) {
-         headerTemplate.appendChild(createHeaderTitle);
+      if (list.pieces) {
+
+         createHeaderTitle.textContent = list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
+        list.pieces.forEach((element) => {
+            template.append(this.artPieceTemplate(element));
+         });
+
       }
-      else{
-       
+      else if (status == "true"){
+         createHeaderTitle.textContent.toUpperCase() = list.firstN + ' ' + list.lastN.toUpperCase();
+        
         template.innerHTML=`
         <h2>Looks like there's nothing here!</h2>
         <p>Try clicking the "+" to add a piece and start your portfolio</p>`;
       }
+      else{
+         createHeaderTitle.textContent = "Art Portfolio";
+        template.innerHTML=`
+        <h2>Looks like there's nothing here!</h2>
+        <p>This artist hasn't uploaded a piece yet. Try checking later.</p>`;
+      }
 
       //createUsersTitle(list);
 
-      list.pieces.forEach((element) => {
-         template.append(this.artPieceTemplate(element));
-      });
+
    }
 
    artPieceTemplate(element) {
@@ -39,7 +53,6 @@ export default class ArtListing {
       var UrlArray = element.img.split('/');
       UrlArray.splice(6, 0, scale);
       const scaledUrl = UrlArray.join('/');
-      console.log('img path ' + scaledUrl);
       let artSection = document.createElement('div');
       let artImg = document.createElement('img');
       artSection.className = 'art-items';
@@ -50,7 +63,7 @@ export default class ArtListing {
       return artSection;
    }
 
-   setLocalStorageId(id) {
-      localStorage.setItem('author', id);
-   }
+//    setLocalStorageId(id) {
+//       localStorage.setItem('author', id);
+//    }
 }

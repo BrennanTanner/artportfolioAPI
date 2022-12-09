@@ -1,19 +1,21 @@
 <nav>
 
-   <ul>
-      <div>
-         <li><a href="../index.html">Home</a></li>
-         <li><a href="../gallery/index.html">Gallery</a></li>
-         <li><a href="../about/index.html">About</a></li>
+   <ul class="menu">
+      <div id="siteNav">
+         <li><a class="menuItem" href="../index.html">Home</a></li>
+         <li><a class="menuItem" href="../gallery/index.html">Gallery</a></li>
+         <li><a class="menuItem" href="../about/index.html">About</a></li>
       </div>
-      <div>
-         <li id="loginButton"><a href="../login/index.html">Login</a></li>
-         <li id="logoutButton" style="display: none"><a href="">Logout</a></li>
-      </div>
-      <div>
-         <li id="userControls" style="display: none">
-            <a href="../newPiece/index.html">+</a>
-         </li>
+      <div id="userNav">
+         <li id="loginButton"><a class="menuItem" href="../login/index.html">Login</a></li>
+         <li id="logoutButton" style="display: none"><a class="menuItem" href="">Logout</a></li>
+        <a class="menuItem" href="../newPiece/index.html"> <li id="userControls" style="display: none">
+            +
+         </li></a>
       </div>
    </ul>
+   <button class="hamburger">
+      <i class="menuIcon material-icons">menu</i>
+      <i class="closeIcon material-icons">close</i>
+    </button>
 </nav>

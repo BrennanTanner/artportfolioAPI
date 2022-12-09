@@ -23,8 +23,8 @@ if (document.getElementById('userSubmit')) {
          document.getElementById('profilePicture').files[0]
       );
 
-      //https://artportfolio.onrender.com
-      let response = await fetch('http://localhost:3030/api/newartist', {
+      //http://localhost:3030/
+      let response = await fetch('https://artportfolio.onrender.com/api/newartist', {
          method: 'POST',
          body: bodyContent,
          headers: headersList,
