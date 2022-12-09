@@ -21,6 +21,9 @@ if (document.getElementById('pieceSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
+      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
+      document.querySelector('#pieceSubmit').setAttribute("style", "display: none;");
+
       let headersList = {
          Accept: '*/*',
       };
@@ -76,7 +79,7 @@ if (document.getElementById('pieceSubmit')) {
 
 
       let data = await response.json();
-      if (data) {
+      if (data.success != false) {
          window.location.replace('../newPiece/pieceUploaded.html');
       }
    });

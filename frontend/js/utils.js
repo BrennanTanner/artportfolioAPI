@@ -46,7 +46,6 @@ export function checkURL() {
 
 export function appendFormLink(form) {
    const formLink = document.querySelector('.formLink');
-   console.log('form: ' + formLink);
    const api = 'https://artportfolio.onrender.com/api/';
    const id = sessionStorage.getItem('_id');
    formLink.setAttribute('method', 'POST');

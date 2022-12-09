@@ -3,6 +3,9 @@ if (document.getElementById('userSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
+      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
+      document.querySelector('#userSubmit').setAttribute("style", "display: none;");
+
       let headersList = {
          Accept: '*/*',
       };
@@ -15,6 +18,8 @@ if (document.getElementById('userSubmit')) {
       //personal info
       bodyContent.append('firstN', document.getElementById('firstN').value);
       bodyContent.append('lastN', document.getElementById('lastN').value);
+      bodyContent.append('email', document.getElementById('email').value);
+      bodyContent.append('phoneNumber', document.getElementById('phoneNumber').value);
       //about me
       bodyContent.append('aboutMe', document.getElementById('aboutMe').value);
       //profile pic

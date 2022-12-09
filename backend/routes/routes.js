@@ -31,6 +31,8 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
       lastN: req.body.lastN,
       username: req.body.username,
       password: hashedPassword,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
       aboutMe: req.body.aboutMe,
       pieces: req.body.pieces,
       profileImg: result.secure_url,
@@ -107,7 +109,9 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
       const result = await pieces.save();
       res.send(result);
    } catch (error) {
-      res.status(400).json({ message: error.message });
+      res.status(400).json({ 
+         success: false,
+         message: error.message });
    }
 });
 

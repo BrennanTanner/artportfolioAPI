@@ -6,18 +6,22 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <script src="../js/main.js" type="module"></script>
       <script src="../js/newPiece.js" type="module"></script>
-      <link rel="stylesheet" href="./src/css/" />
-      <title>Artist Portfolio</title>
+      <link rel="stylesheet" href="../css/style.css" />
+      <link rel="stylesheet" href="../css/form.css" />
+      <title>New Piece</title>
    </head>
 
    <header class="divider" id="main-header"></header>
 
    <body>
       <section>
-         <h2>New Piece</h2>
+         <h1 class="pageTitle">New Piece</h1>
+
+         <div class="form-style-10">
          <form name="newPiece" class="formLink" enctype="multipart/form-data">
             <fieldset>
                <legend>Piece Info</legend>
+               <div class="inner-wrap">
                <label for="title">Piece Title</label><br />
                <input
                   type="text"
@@ -38,9 +42,9 @@
                   name="isFavorite"
                   value="true"
                />
-               <label for="isFavorite"
-                  >Favorite this Piece? (favorited piece appear on your
-                  homepage)</label
+               <label id="favoriteLabel" for="isFavorite"
+                  >Favorite this Piece? <span style="font-size:8pt;"></br>(favorited piece appear on your
+                  homepage)</span></label
                >
 
                  <label for="isFavorite"></label><br /><br />
@@ -51,29 +55,41 @@
                   rows="6"
                   cols="60"
                ></textarea>
+            </div>
             </fieldset>
             <fieldset>
+               
                <legend>Main Image</legend>
+               <div class="inner-wrap">
                <input
                   type="file"
                   id="mainPicture"
                   name="image"
                   accept="image/png, image/jpeg"
                   required
-               /><br />
+               /><br /></div>
             </fieldset>
 
             <fieldset>
                <legend>Draft Images</legend>
+               <div class="inner-wrap">
                <div id="draftSection"></div>
-               <div id="addDraft"><h3>+</h3></div>
+               <div  ><h3 id="addDraft">+</h3></div>
                <div id="draftLimit" style="color: red; display: none">
                   <p>You can only have 5 drafts!</p>
                </div>
+            </div>
             </fieldset>
 
-            <button type="submit" id="pieceSubmit">Submit</button>
-         </form>
+            <div id="loginBottom">
+               <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               
+            <div class="button-section">
+            <input type="submit" id="pieceSubmit" ></input>
+            </div>
+         </div>
+      </form>
+      
       </section>
    </body>
    <footer class="divider" id="main-footer"></footer>
