@@ -25,6 +25,27 @@ const artistSchema = mongoose.Schema({
       required: true,
       type: String,
    },
+   email: {
+
+      type: String,
+   },
+   phoneNumber: {
+
+      type: String,
+   },
+   social: [
+      {
+         socialPlatform: {
+
+            type: String,
+         },
+         socialUrl: {
+
+            type: String,
+         },
+
+      },
+   ],
    aboutBody: String,
    pieces: [
       {

@@ -5,18 +5,19 @@
       <link rel="icon" type="image/svg+xml" href="/Artboard 3.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="../css/style.css" />
+      <link rel="stylesheet" href="../css/form.css" />
       <script src="../js/admin.js" type="module"></script>
-      <title>Artist Portfolio</title>
+      <title>Login</title>
    </head>
 
    <header class="divider" id="main-header"></header>
 
    <body>
       <section id="loginArea">
-         <h2>Login</h2>
-         <form name="login" onsubmit="sendData()" id="login">
+         <h2 class="pageTitle">Login</h2>
+         <form name="login" onsubmit="sendData()" id="login" class="login-form">
             <fieldset>
-               <div>
+               <div class="form-input-material">
                   <label for="username">Username</label><br />
                   
                   <input
@@ -34,9 +35,10 @@
                      required
                   />
                </div>
+               <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </fieldset>
 
-            <input type="submit" id="loginSubmit"></input>
+            <input type="submit" id="loginSubmit" class="btn"></input>
          </form>
       </section>
 

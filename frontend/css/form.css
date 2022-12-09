@@ -1,0 +1,23 @@
+form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   min-height: 100vh;
+ }
+ 
+ form fieldset{
+ width: 50%;
+    background: #eceffc;
+    box-shadow: 5px 5px 8px;
+    margin: 10px;
+}
+
+form label{
+  width: 50%;
+ }
+ .btn {
+   padding: 8px 20px;
+   border-radius: 0;
+   overflow: hidden;
+ }
+ 

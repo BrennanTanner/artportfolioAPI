@@ -31,6 +31,8 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
       lastN: req.body.lastN,
       username: req.body.username,
       password: hashedPassword,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
       aboutMe: req.body.aboutMe,
       pieces: req.body.pieces,
       profileImg: result.secure_url,

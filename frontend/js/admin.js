@@ -20,6 +20,8 @@ if (document.getElementById('loginSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
+      document.querySelector('.lds-roller').setAttribute("z-index", "1");
+
       let headersList = {
          Accept: '*/*',
       };

@@ -59,6 +59,16 @@ nav #userNav {
    
 }
 
+#addDraft {
+   font-family: 'Work Sans', sans-serif;
+   font-weight: 900;
+   font-size: larger;
+   background-color: #ffffff;
+   border-radius: 15px;
+   padding: .9rem 2rem;
+   cursor: pointer;
+   width: 10px;
+}
 
  #userControls {
    font-family: 'Work Sans', sans-serif;
@@ -87,6 +97,7 @@ nav #siteNav:after {
    font-weight: 300;
    margin-bottom: 0;
    color: var(--dark-grey);
+   font-size: 35pt;
 }
 
 .hamburger {
@@ -121,6 +132,10 @@ li {
 a {
    font-size: 1.1em;
    text-decoration: none;
+}
+
+.pageTitle{
+  text-align: center;
 }
 
 .art-collection {
@@ -162,23 +177,156 @@ a {
     
 }
 
-.about{
+.aboutSection{
    background-color: #e7f1f8;
    height: 300px;
    display: flex;
-   justify-content: space-evenly
+   justify-content: space-evenly;
+   padding: 15px;
 }
 
-.about p{
+.aboutSection p{
 width: 60%;
 }
 
-.about img {
+.aboutSection img {
    border-radius: 50%;
 max-width: 100%;
 max-height: 80%;
+margin-top: auto;
+margin-bottom: auto;
+margin-left: 30px;
 }
 
+.textInfo>p {
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+}
+.textInfo {
+   text-align: center;
+   }
+.contactInfo {
+   display:flex;
+
+   justify-content: space-around;
+}
+.contactInfo div{
+   margin: 0px 40px;
+   justify-content: space-around;
+   display:flex;
+   align-items: center;
+   
+}
+.contactInfo div p{
+   margin: 20px 20px;
+}
+
+.contactInfo div img{
+   max-height: 50%;
+   
+}
+
+#footer {
+text-align: center;
+}
+#footer img{
+max-width: 7%;
+}
+
+#login fieldset {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.lds-roller {
+   z-index: -1;
+   display: inline-block;
+   position: relative;
+   width: 80px;
+   height: 80px;
+
+ }
+ .lds-roller div {
+   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+   transform-origin: 40px 40px;
+ }
+ .lds-roller div:after {
+   content: " ";
+   display: block;
+   position: absolute;
+   width: 7px;
+   height: 7px;
+   border-radius: 50%;
+   background: rgb(157, 157, 157);
+   margin: -4px 0 0 -4px;
+ }
+ .lds-roller div:nth-child(1) {
+   animation-delay: -0.036s;
+ }
+ .lds-roller div:nth-child(1):after {
+   top: 63px;
+   left: 63px;
+ }
+ .lds-roller div:nth-child(2) {
+   animation-delay: -0.072s;
+ }
+ .lds-roller div:nth-child(2):after {
+   top: 68px;
+   left: 56px;
+ }
+ .lds-roller div:nth-child(3) {
+   animation-delay: -0.108s;
+ }
+ .lds-roller div:nth-child(3):after {
+   top: 71px;
+   left: 48px;
+ }
+ .lds-roller div:nth-child(4) {
+   animation-delay: -0.144s;
+ }
+ .lds-roller div:nth-child(4):after {
+   top: 72px;
+   left: 40px;
+ }
+ .lds-roller div:nth-child(5) {
+   animation-delay: -0.18s;
+ }
+ .lds-roller div:nth-child(5):after {
+   top: 71px;
+   left: 32px;
+ }
+ .lds-roller div:nth-child(6) {
+   animation-delay: -0.216s;
+ }
+ .lds-roller div:nth-child(6):after {
+   top: 68px;
+   left: 24px;
+ }
+ .lds-roller div:nth-child(7) {
+   animation-delay: -0.252s;
+ }
+ .lds-roller div:nth-child(7):after {
+   top: 63px;
+   left: 17px;
+ }
+ .lds-roller div:nth-child(8) {
+   animation-delay: -0.288s;
+ }
+ .lds-roller div:nth-child(8):after {
+   top: 56px;
+   left: 12px;
+ }
+ @keyframes lds-roller {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+ 
 @media (prefers-color-scheme: light) {
    :root {
       color: #213547;
