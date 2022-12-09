@@ -1,7 +1,6 @@
 import { checkStatus, logout } from './admin';
 
 function convertToText(res) {
-   console.log(res);
    if (res.ok) {
       return res.text();
    } else {
@@ -26,39 +25,46 @@ export function renderWithTemplate(template, parent, data, callback) {
 
 export function checkURL() {
    const loggedIn = checkStatus();
-const path = getIdFromUrl();
+   const path = getIdFromUrl();
 
-const _id = sessionStorage.getItem('_id');
+   const _id = sessionStorage.getItem('_id');
 
    if (!_id) {
-    if (path == 'index.html' || path == "") {
-            window.location.replace('/login/index.html');
-      }
-      else if (path == 'about' || path == "gallery"){}
-      else{
-        console.log(path);
+      if (path == 'index.html' || path == '') {
+         window.location.replace('/login/index.html');
+      } else if (path == 'about' || path == 'gallery') {
+      } else {
+         console.log(path);
          sessionStorage.setItem('_id', path);
       }
    } else {
-      if (path == 'index.html' || path == "") {
-      window.location.replace('/'+ _id);
-}
+      if (path == 'index.html' || path == '') {
+         window.location.replace('/' + _id);
+      }
    }
+}
 
-   console.log('path: ' + path);
-   console.log('loggedin: ' + loggedIn);
+export function appendFormLink(form) {
+   const formLink = document.querySelector('.formLink');
+   console.log('form: ' + formLink);
+   const api = 'https://artportfolio.onrender.com/api/';
+   const id = sessionStorage.getItem('_id');
+   formLink.setAttribute('method', 'POST');
+   formLink.setAttribute('action', api + form + id);
 }
 
 export function getIdFromUrl() {
    var pathArray = window.location.pathname.split('/');
 
    if (pathArray[1] == 'about' || pathArray[1] == 'gallery') {
-    const id = sessionStorage.getItem('_id');
+      const id = sessionStorage.getItem('_id');
       return pathArray[1];
    } else {
       return pathArray[1];
    }
 }
+
+
 
 export async function loadHeaderFooter() {
    const loggedIn = checkStatus();

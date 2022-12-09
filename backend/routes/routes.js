@@ -9,15 +9,22 @@ require('dotenv').config();
 
 //new user method
 router.post('/newartist', upload.single('image'), async (req, res) => {
+   const username = req.body.username;
+   const user = await Model.findOne({ username: username });
+   if (user){
+      return res.json({
+         success: false,
+         message: 'Username already taken'
+      });
+   }
+
    // Upload image to cloudinary
    const result = await cloudinary.uploader.upload(req.file.path);
 
    const password = req.body.password;
 
-   console.log('password: ' + password);
 
    const hashedPassword = await bcrypt.hash(password, 12);
-   console.log('hashed password: ' + hashedPassword);
    // Create new user
    const data = new Model({
       firstN: req.body.firstN,
@@ -62,7 +69,7 @@ router.post('/login', upload.single('image'), async (req, response) => {
 });
 
 //add a new piece method
-router.patch('/newpiece/:id', upload.array('image', 5), async (req, res) => {
+router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
    try {
       const id = req.params.id;
       const oldPiece = req.body;
@@ -158,7 +165,7 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
 
       const data = await Model.findById(userId);
 
-      console.log(data.pieces);
+
       data.pieces = data.pieces.filter(
          (item) => JSON.stringify(item._id) != pieceId
       );
