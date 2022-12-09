@@ -28,7 +28,6 @@ export function checkURL() {
    const path = getIdFromUrl();
 
    const _id = sessionStorage.getItem('_id');
-
    if (!_id) {
       if (path == 'index.html' || path == '') {
          window.location.replace('/login/index.html');
@@ -54,12 +53,16 @@ export function appendFormLink(form) {
 
 export function getIdFromUrl() {
    var pathArray = window.location.pathname.split('/');
+  let i = 1;
+   if (pathArray[i]== "Art-Portfolio"){
+      i++
+   }
 
-   if (pathArray[1] == 'about' || pathArray[1] == 'gallery') {
+   if (pathArray[i] == 'about' || pathArray[1] == 'gallery') {
       const id = sessionStorage.getItem('_id');
-      return pathArray[1];
+      return pathArray[i];
    } else {
-      return pathArray[1];
+      return pathArray[i];
    }
 }
 
