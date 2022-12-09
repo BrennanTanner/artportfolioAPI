@@ -4,16 +4,12 @@ export default class ArtListing {
     }
 
     async init() {
-        const list = await this.dataSource.getData();
-        const authorId = list[0]._id
+        const list = await this.dataSource.getOwnersData();
+        const authorId =  sessionStorage.getItem('_id');
 
-        this.setLocalStorageId(authorId);
-
-        const authorData = await this.dataSource.getOwnersData(authorId);
         const template = document.querySelector('.art-collection')
-        console.log(authorData)
 
-        authorData.pieces.forEach((element) => {
+        list.pieces.forEach((element) => {
             console.log(element)
             template.append(this.artPieceTemplate(element))
         })
@@ -23,19 +19,19 @@ export default class ArtListing {
     artPieceTemplate(element) {
         let artSection = document.createElement('div');
         let artTitle = document.createElement('h1');
+        let artMainImg = document.createElement('img');
         let artMedium = document.createElement('p');
-        let artSummaryTitle = document.createElement('h3')
         let artSummary = document.createElement('p');
         let imageArea = document.createElement('div');
         let singleImage = document.createElement('img')
         let image 
 
         artSection.className = "art-items";
+        artMainImg.setAttribute("src", element.img);
         artTitle.textContent = element.title;
-        artSummaryTitle.textContent = "Summary"
-        artMedium.textContent = `Medium: ${element.medium}`;
+        artMedium.textContent = element.medium;
         artSummary.textContent = element.aboutBody;
-        imageArea.className = "image-content"
+        imageArea.className = "gallery-image-content"
 
         singleImage.src = element.img;
         
@@ -47,17 +43,13 @@ export default class ArtListing {
             artImage.className = "gallery-image"
             imageArea.appendChild(artImage)
         })
-        artSection.appendChild(artTitle)
-        artSection.appendChild(imageArea)
-        artSection.appendChild(artMedium)
-        artSection.appendChild(artSummaryTitle)
-        artSection.appendChild(artSummary)
+        artSection.appendChild(artTitle);
+        artSection.appendChild(artMainImg);
+        artSection.appendChild(imageArea);
+        artSection.appendChild(artMedium);
+        artSection.appendChild(artSummary);
 
         return artSection;
     }
 
-
-    setLocalStorageId(id) {
-        localStorage.setItem('author', id)
-    }
 }

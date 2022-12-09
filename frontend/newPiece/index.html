@@ -2,9 +2,10 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
-      <link rel="icon" type="image/svg+xml" href="./public/Artboard 3.svg" />
+      <link rel="icon" type="image/svg+xml" href="/Artboard 3.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <script src="./js/main.js" type="module"></script>
+      <script src="../js/main.js" type="module"></script>
+      <script src="../js/newPiece.js" type="module"></script>
       <link rel="stylesheet" href="./src/css/" />
       <title>Artist Portfolio</title>
    </head>
@@ -14,7 +15,43 @@
    <body>
       <section>
          <h2>New Piece</h2>
-         <form name="newPiece">
+         <form name="newPiece" class="formLink" enctype="multipart/form-data">
+            <fieldset>
+               <legend>Piece Info</legend>
+               <label for="title">Piece Title</label><br />
+               <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  required
+               /><br /><br />
+               <label for="medium">Art Medium</label><br />
+               <input
+                  type="text"
+                  id="medium"
+                  name="medium"
+                  required
+               /><br /><br />
+               <input
+                  type="checkbox"
+                  id="isFavorite"
+                  name="isFavorite"
+                  value="true"
+               />
+               <label for="isFavorite"
+                  >Favorite this Piece? (favorited piece appear on your
+                  homepage)</label
+               >
+
+                 <label for="isFavorite"></label><br /><br />
+               <label for="aboutBody">Write about your piece</label><br />
+               <textarea
+                  id="aboutBody"
+                  name="aboutBody"
+                  rows="6"
+                  cols="60"
+               ></textarea>
+            </fieldset>
             <fieldset>
                <legend>Main Image</legend>
                <input
@@ -27,39 +64,17 @@
             </fieldset>
 
             <fieldset>
-               <div id="draftSection">
-                  <legend>Draft Images</legend>
-                  <input
-                     type="file"
-                     id="draftImage"
-                     name="image"
-                     accept="image/png, image/jpeg"
-                     required
-                  /><br />
-               </div>
-               <div onclick="addDraftElement()" id="addDraft"><h3>+</h3></div>
+               <legend>Draft Images</legend>
+               <div id="draftSection"></div>
+               <div id="addDraft"><h3>+</h3></div>
                <div id="draftLimit" style="color: red; display: none">
-                  <p>You can only have 5 images!</p>
+                  <p>You can only have 5 drafts!</p>
                </div>
             </fieldset>
 
-            <button type="submit" id="checkoutSubmit">Checkout</button>
+            <button type="submit" id="pieceSubmit">Submit</button>
          </form>
       </section>
    </body>
-   <script>
-      draftSection = document.getElementById('draftSection');
-      draftUpload = document.getElementById('addDraft');
-      draftMessage = document.getElementById('draftLimit');
-      var counter = 0;
-      function addDraftElement() {
-         if (counter == 4) {
-            draftMessage.style.display = 'inline';
-         } else {
-            draftSection.innerHTML += `<input type="file" id="draftImage" name="image" accept="image/png, image/jpeg" required/><br />`;
-            counter++;
-         }
-      }
-   </script>
    <footer class="divider" id="main-footer"></footer>
 </html>

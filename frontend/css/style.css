@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Mate+SC&family=Nunito:wght@700&family=Work+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 :root {
    --font-body: 'Lato', sans-serif;
@@ -33,30 +34,84 @@ nav {
    font-family: 'Mate SC', serif;
 }
 
+a:visited {
+   color: var(--dark-grey);
+}
+
+a:active {
+   background-color: #e5e5e5;
+   border-radius: 15px;
+}
+
+nav div {
+   display: flex;
+}
+
+nav #siteNav {
+   margin-left: auto;
+   margin-right: -8%;
+}
+
+nav #userNav {
+   display: flex;
+   margin-left: auto;
+   align-content: center;
+   
+}
+
+
+ #userControls {
+   font-family: 'Work Sans', sans-serif;
+   font-weight: 900;
+   font-size: larger;
+   background-color: #e5e5e5;
+   border-radius: 15px;
+   padding: .9rem 2rem;
+   cursor: pointer;
+}
+
+nav #siteNav:before,
+nav #siteNav:after {
+   background-color: #8c8c8c;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+   content: '';
+   width: 6em;
+   height: 1px;
+   margin: 1.7em 3em 0 3em;
+}
+
 .nav-title {
    font-size: 1.5em;
+   text-align: center;
+   font-weight: 300;
    margin-bottom: 0;
+   color: var(--dark-grey);
+}
+
+.hamburger {
+display: none;
 }
 
 .image-content {
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    align-items: center;
-}
-
-.gallery-image {
-   width: 20%;
 }
 
 .art-collection {
    display: flex;
-   flex-direction: column;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 10px;
 }
 
 ul {
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: center;
    list-style-type: none;
 }
 
@@ -69,6 +124,62 @@ a {
    text-decoration: none;
 }
 
+.art-collection {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+
+}
+.art-items {
+   width: 49%;
+   text-align: center;
+   background-color: #f9f9f9;
+
+}
+
+.art-items p{
+  width:60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.art-items>img{
+   width: 300px;
+}
+
+.gallery-image-content{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.gallery-image{
+   
+   max-width:20%;
+   max-height:100%;
+      margin: 10px;
+      object-fit: contain;
+    
+}
+
+.about{
+   background-color: #e7f1f8;
+   height: 300px;
+   display: flex;
+   justify-content: space-evenly
+}
+
+.about p{
+width: 60%;
+}
+
+.about img {
+   border-radius: 50%;
+max-width: 100%;
+max-height: 80%;
+}
+
 @media (prefers-color-scheme: light) {
    :root {
       color: #213547;
@@ -79,5 +190,112 @@ a {
    }
    button {
       background-color: #f9f9f9;
+   }
+}
+
+@media screen and (max-width: 780px) {
+   
+   .nav-title:after {
+      background-color: #8c8c8c;
+      display: block;
+      content: '';
+      width: 9em;
+      height: 1px;
+      margin: 20px auto 30px auto;
+   }
+
+   .hamburger {
+      display:block;
+      position: fixed;
+      z-index: 100;
+      top: 1rem;
+      right: 1rem;
+      padding: 4px;
+      border: none;
+      cursor: pointer;
+   }
+
+   li:hover {
+      background-color: #cccccc;
+   }
+   .closeIcon {
+      display: none;
+   }
+
+   .showMenu {
+      transform: translateY(0);
+   }
+
+   nav div {
+      display: block;
+   }
+
+   nav ul {
+      position: fixed;
+      transform: translateY(-100%);
+      transition: transform 0.2s;
+      top: -20px;
+      left: 0;
+      right: 0;
+      bottom: 50%;
+      border-radius: 0px 0px 15px 15px;
+      z-index: 99;
+      background: #f0f0f0;
+      color: white;
+      list-style: none;
+      padding-top: 5rem;
+   }
+
+   nav #siteNav {
+      margin-left: 0;
+      margin-right: 0;
+      width:90%;
+   }
+
+   nav #userNav {
+      margin-top: 10px;
+      margin-right: 0px;
+      margin-left: 0px;
+      display: flex;
+      width:90%;
+      flex-direction: column;
+   }
+
+   #userControls {
+      font-family: 'Work Sans', sans-serif;
+      background-color: white;
+      color: var(--dark-grey);
+      border-radius: 15px;
+      width:15px;
+      margin-left: 0px;
+   }
+
+   nav #siteNav:before,
+   nav #siteNav:after {
+      display: none;
+   }
+
+   ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      list-style-type: none;
+   }
+
+   .nav-title {
+      text-align: center;
+      font-weight: 300;
+      margin-bottom: 0;
+      color: var(--dark-grey);
+   }
+
+   .art-collection {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+   }
+   .art-items {
+      text-align: center;
    }
 }

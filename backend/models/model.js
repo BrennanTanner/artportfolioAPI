@@ -9,6 +9,14 @@ const artistSchema = mongoose.Schema({
       required: true,
       type: String,
    },
+   username: {
+      type: String,
+      required: true
+    },
+   password: {
+      type: String,
+      required: true
+    },
    profileImg: {
       required: true,
       type: String,
