@@ -8,8 +8,12 @@ export default class AboutList {
         const id  = getIdFromUrl();
         const list = await this.dataSource.getOwnersData(id);
 
+        document.getElementById("loading").setAttribute("style", "display:none;");
+
         const template = document.querySelector('.aboutCollection');
-        console.log(template);
+        
+
+        
         template.append(this.artPieceTemplate(list))
         
     }
@@ -48,7 +52,7 @@ export default class AboutList {
         mail.appendChild(email);
         call.appendChild(callIcon);
         call.appendChild(phone);
-        
+
         return aboutSection;
     }
 

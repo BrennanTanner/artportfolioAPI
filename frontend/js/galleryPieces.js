@@ -9,6 +9,8 @@ export default class ArtListing {
 
         const template = document.querySelector('.art-collection')
 
+        document.getElementById("loading").setAttribute("style", "display:none;"); 
+        
         list.pieces.forEach((element) => {
             console.log(element)
             template.append(this.artPieceTemplate(element))

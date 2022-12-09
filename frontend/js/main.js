@@ -7,12 +7,11 @@ import {
    loadHeaderFooter,
    checkURL,
    getIdFromUrl,
-   appendFormLink,
+   appendFormLink
 } from './utils';
 
 checkURL();
 loadHeaderFooter();
-
 const path = getIdFromUrl();
 
 const dataSource = new ExternalServices();
@@ -33,8 +32,3 @@ if (path == 'about') {
    myArt.init();
 }
 
-// document.querySelector('#img')
-// .addEventListener('click', (e) => {
-//   e.preventDefault();
-//     dataSource.checkout();
-// });

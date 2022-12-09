@@ -3,6 +3,9 @@ if (document.getElementById('userSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
+      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
+      document.querySelector('#userSubmit').setAttribute("style", "display: none;");
+
       let headersList = {
          Accept: '*/*',
       };

@@ -240,6 +240,13 @@ max-width: 7%;
    justify-content: space-around;
 }
 
+#loading{
+   display: flex;
+   padding-bottom: 40px;
+   flex-direction: row;
+   justify-content: space-around;
+   }
+
 .lds-roller {
    z-index: -1;
    display: inline-block;

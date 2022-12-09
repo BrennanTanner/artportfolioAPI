@@ -20,6 +20,8 @@ export default class ArtListing {
       
       headerTemplate.appendChild(createHeaderTitle);
 
+document.getElementById("loading").setAttribute("style", "display:none;");
+
       if (list.pieces) {
 
          createHeaderTitle.textContent = list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();

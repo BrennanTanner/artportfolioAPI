@@ -15,9 +15,10 @@
    <body>
       <section id="loginArea">
          <h2 class="pageTitle">Login</h2>
-         <form name="login" onsubmit="sendData()" id="login" class="login-form">
+      <div class="form-style-10">
+         <form name="login" onsubmit="sendData()">
             <fieldset>
-               <div class="form-input-material">
+         <div class="inner-wrap">
                   <label for="username">Username</label><br />
                   
                   <input
@@ -35,14 +36,21 @@
                      required
                   />
                </div>
-               <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </fieldset>
+            <div id="loginBottom">
+               <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               
+            
 
             <input type="submit" id="loginSubmit" class="btn"></input>
+         </div>
+         </div>
+        
          </form>
+      </div>
       </section>
 
-      <section class="loggedinMessage">
+      <section class="bottomText">
          <p>Or you can <a href="../newUser/index.html"> Create an Account </a> here</p>
       </section>
    </body>
