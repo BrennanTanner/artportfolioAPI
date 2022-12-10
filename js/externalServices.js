@@ -1,7 +1,4 @@
-import { getIdFromUrl } from "./utils";
-
 const baseURL = 'https://artportfolio.onrender.com/';
-const imageURL = '';
 
 async function convertToJson(res) {
    if (res.ok) {

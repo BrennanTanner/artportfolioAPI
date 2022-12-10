@@ -1,4 +1,4 @@
-import { getIdFromUrl } from "./utils";
+import { getIdFromUrl } from "./utils.js";
 
 export default class AboutList {
     constructor(dataSource) {

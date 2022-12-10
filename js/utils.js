@@ -1,4 +1,4 @@
-import { checkStatus, logout } from './admin';
+import { checkStatus, logout } from './admin.js';
 
 function convertToText(res) {
    if (res.ok) {
