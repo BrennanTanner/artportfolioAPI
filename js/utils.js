@@ -55,7 +55,7 @@ export function getIdFromUrl() {
    var pathArray = window.location.pathname.split('/');
    let i = 1;
     if (pathArray[i]== "artportfolioAPI"){
-       i=3
+       i=2
     }
 
    if (pathArray[i] == 'about' || pathArray[i] == 'gallery') {
