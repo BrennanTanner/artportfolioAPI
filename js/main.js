@@ -1,14 +1,14 @@
-import './css/style.css';
-import AboutList from '/js/aboutList';
-import ArtListing from '/js/artListing.js';
-import GalleryPieces from '/galleryPieces';
+import '../css/style.css';
+import AboutList from './js/aboutList.js';
+import ArtListing from './js/artListing.js';
+import GalleryPieces from './galleryPieces.js';
 import ExternalServices from './externalServices.js';
 import {
    loadHeaderFooter,
    checkURL,
    getIdFromUrl,
    appendFormLink
-} from './utils';
+} from './utils.js';
 
 checkURL();
 loadHeaderFooter();
