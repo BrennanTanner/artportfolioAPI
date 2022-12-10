@@ -30,7 +30,7 @@ export function checkURL() {
    const _id = sessionStorage.getItem('_id');
    if (!_id) {
       if (path == 'index.html' || path == '') {
-         window.location.replace('artportfolioAPI/login/index.html');
+         window.location.replace('login/index.html');
       } else if (path == 'about' || path == 'gallery') {
       } else {
          console.log(path);
