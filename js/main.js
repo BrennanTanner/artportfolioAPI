@@ -1,4 +1,4 @@
-import '../css/style.css';
+//import '../css/style.css';
 import AboutList from './aboutList.js';
 import ArtListing from './artListing.js';
 import GalleryPieces from './galleryPieces.js';
