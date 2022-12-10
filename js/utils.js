@@ -24,7 +24,6 @@ export function renderWithTemplate(template, parent, data, callback) {
 }
 
 export function checkURL() {
-   const loggedIn = checkStatus();
    const path = getIdFromUrl();
 
    const _id = sessionStorage.getItem('_id');
@@ -33,12 +32,12 @@ export function checkURL() {
          window.location.replace('login/index.html');
       } else if (path == 'about' || path == 'gallery') {
       } else {
-         console.log(path);
-         sessionStorage.setItem('_id', path);
+         var pathArray = window.location.pathname.split('?');
+         sessionStorage.setItem('_id', pathArray[1]);
       }
    } else {
       if (path == 'index.html' || path == '') {
-         window.location.replace('/' + _id);
+         window.location.replace('index.html' +'?'+ _id);
       }
    }
 }

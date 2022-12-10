@@ -42,10 +42,9 @@ if (document.getElementById('loginSubmit')) {
 
       let data = await response.json();
       if (data.success == true) {
-         console.log(data._id);
          sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
-         window.location.replace('./' + data._id);
+         window.location.replace('index.html' + '?' + data._id);
       }
    });
 }

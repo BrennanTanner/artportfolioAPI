@@ -44,7 +44,7 @@ if (document.getElementById('userSubmit')) {
       else{
          sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
-         window.location.replace('/' + data._id);
+         window.location.replace('index.html' + '?' + data._id);
       }
    });
 }
