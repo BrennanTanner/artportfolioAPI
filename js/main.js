@@ -1,6 +1,6 @@
 import '../css/style.css';
-import AboutList from './js/aboutList.js';
-import ArtListing from './js/artListing.js';
+import AboutList from './aboutList.js';
+import ArtListing from './artListing.js';
 import GalleryPieces from './galleryPieces.js';
 import ExternalServices from './externalServices.js';
 import {
