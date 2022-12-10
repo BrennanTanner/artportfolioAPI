@@ -20,7 +20,7 @@ body {
 }
 header {
    display: flex;
-   flex-direction: column-reverse;
+   flex-direction: column;
    justify-content: space-between;
    padding: 0 10px;
 }
