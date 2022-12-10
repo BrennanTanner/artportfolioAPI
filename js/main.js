@@ -1,5 +1,5 @@
-import '../css/style.css';
-import AboutList from './aboutList';
+import '/css/style.css';
+import AboutList from '/js/aboutList.js';
 import ArtListing from './artListing';
 import GalleryPieces from './galleryPieces';
 import ExternalServices from './externalServices';
