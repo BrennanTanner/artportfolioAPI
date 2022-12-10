@@ -54,8 +54,8 @@ export function appendFormLink(form) {
 export function getIdFromUrl() {
    var pathArray = window.location.pathname.split('/');
    let i = 1;
-    if (pathArray[i]== "Art-Portfolio"){
-       i++
+    if (pathArray[i]== "artportfolioAPI"){
+       i=3
     }
 
    if (pathArray[i] == 'about' || pathArray[i] == 'gallery') {
