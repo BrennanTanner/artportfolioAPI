@@ -1,4 +1,4 @@
-import { checkStatus } from "./admin";
+import { checkStatus } from "./admin.js";
 
 export default class ArtListing {
    constructor(dataSource) {
