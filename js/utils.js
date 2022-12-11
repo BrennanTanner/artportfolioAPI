@@ -28,22 +28,21 @@ export function checkURL() {
    const pathId = getIdFromUrl();
    const _id = sessionStorage.getItem('_id');
 
-   if(_id == undefined && pathId != _id){
+   if (_id == undefined && pathId != _id) {
       sessionStorage.setItem('_id', pathId);
-      console.log("utils 1 "+pathId);
-   }
-  else if (!_id) {
+      console.log('utils 1 ' + pathId);
+   } else if (!_id) {
       if (path == 'login') {
       } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
          window.location.replace('./login/index.html');
-         console.log("here 1");
+         console.log('here 1');
       } else {
          if (!pathId) {
             window.location.replace('../login/index.html');
-            console.log("here 2");
+            console.log('here 2');
          } else {
             sessionStorage.setItem('_id', pathId);
-            console.log("utils 2 "+pathId);
+            console.log('utils 2 ' + pathId);
          }
       }
    } else {
@@ -88,9 +87,22 @@ export function getIdFromUrl() {
 
 export async function loadHeaderFooter() {
    const loggedIn = await checkStatus();
+   const path = getLocationFromUrl();
 
-   const header = await loadTemplate('../partials/header.html');
-   const footer = await loadTemplate('../partials/footer.html');
+   if (
+      path == 'about' ||
+      path == 'gallery' ||
+      path == 'newPiece' ||
+      path == 'newUser'
+   ) {
+      const header = await loadTemplate('../partials/header.html');
+      const footer = await loadTemplate('../partials/footer.html');
+   } else {
+      const header = await loadTemplate('./partials/header.html');
+      const footer = await loadTemplate('./partials/footer.html');
+   }
+
+
    const headerElement = document.getElementById('main-header');
    const footerElement = document.getElementById('main-footer');
 
