@@ -24,20 +24,34 @@ export function renderWithTemplate(template, parent, data, callback) {
 }
 
 export function checkURL() {
-   const path = getIdFromUrl();
+   const path = getLocationFromUrl();
+   const pathId = getIdFromUrl();
 
    const _id = sessionStorage.getItem('_id');
    if (!_id) {
-      if (path == 'index.html' || path == '') {
-         window.location.replace('login/index.html');
-      } else if (path == 'about' || path == 'gallery') {
-      } else {
-         var pathArray = window.location.pathname.split('?');
-         sessionStorage.setItem('_id', pathArray[1]);
+      if (path == 'login'){
+         
+      } else if (
+         path != 'about' &&
+         path != 'gallery' ||  path == 'newPiece'
+      ) {
+         window.location.replace('../login/index.html');
+      }else{
+         if(!pathId){
+            window.location.replace('../login/index.html');
+         }
+         else{
+            sessionStorage.setItem('_id', pathId);
+         }
       }
    } else {
-      if (path == 'index.html' || path == '') {
-         window.location.replace('index.html' +'?'+ _id);
+ if (
+         path == 'about' ||
+         path == 'gallery' ||  path == 'newPiece' || path == 'login'
+      ) {
+
+      }else{
+         //window.location.replace('?' + _id);
       }
    }
 }
@@ -50,22 +64,24 @@ export function appendFormLink(form) {
    formLink.setAttribute('action', api + form + id);
 }
 
-export function getIdFromUrl() {
-   var pathArray = window.location.pathname.split('/');
-   let i = 1;
-    if (pathArray[i]== "artportfolioAPI"){
-       i=2
-    }
+export function getLocationFromUrl() {
+   var URLArray = window.location.pathname.split('?');
+   var pathArray = URLArray[0].split('/');
 
-   if (pathArray[i] == 'about' || pathArray[i] == 'gallery') {
-      const id = sessionStorage.getItem('_id');
-      return pathArray[i];
+   var lastItem = pathArray.length - 1;
+
+   if (pathArray[lastItem] == 'index.html') {
+      return pathArray[lastItem - 1];
    } else {
-      return pathArray[i];
+      return pathArray[lastItem];
    }
 }
 
+export function getIdFromUrl() {
+   var URLArray = window.location.pathname.split('?');
 
+   return URLArray[1];
+}
 
 export async function loadHeaderFooter() {
    const loggedIn = checkStatus();
@@ -90,29 +106,27 @@ export async function loadHeaderFooter() {
          });
    }
 
-   const menu = document.querySelector(".menu");
-const menuItems = document.querySelectorAll(".menuItem");
-const hamburger= document.querySelector(".hamburger");
-const closeIcon= document.querySelector(".closeIcon");
-const menuIcon = document.querySelector(".menuIcon");
+   const menu = document.querySelector('.menu');
+   const menuItems = document.querySelectorAll('.menuItem');
+   const hamburger = document.querySelector('.hamburger');
+   const closeIcon = document.querySelector('.closeIcon');
+   const menuIcon = document.querySelector('.menuIcon');
 
-function toggleMenu() {
-   if (menu.classList.contains("showMenu")) {
-     menu.classList.remove("showMenu");
-     closeIcon.style.display = "none";
-     menuIcon.style.display = "block";
-   } else {
-     menu.classList.add("showMenu");
-     closeIcon.style.display = "block";
-     menuIcon.style.display = "none";
+   function toggleMenu() {
+      if (menu.classList.contains('showMenu')) {
+         menu.classList.remove('showMenu');
+         closeIcon.style.display = 'none';
+         menuIcon.style.display = 'block';
+      } else {
+         menu.classList.add('showMenu');
+         closeIcon.style.display = 'block';
+         menuIcon.style.display = 'none';
+      }
    }
- }
 
- hamburger.addEventListener("click", toggleMenu);
+   hamburger.addEventListener('click', toggleMenu);
 
-menuItems.forEach( 
-  function(menuItem) { 
-    menuItem.addEventListener("click", toggleMenu);
-  }
-)
+   menuItems.forEach(function (menuItem) {
+      menuItem.addEventListener('click', toggleMenu);
+   });
 }

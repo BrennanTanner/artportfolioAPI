@@ -6,13 +6,13 @@ import ExternalServices from './externalServices.js';
 import {
    loadHeaderFooter,
    checkURL,
-   getIdFromUrl,
+   getLocationFromUrl,
    appendFormLink
 } from './utils.js';
 
 checkURL();
 loadHeaderFooter();
-const path = getIdFromUrl();
+const path = getLocationFromUrl();
 
 const dataSource = new ExternalServices();
 

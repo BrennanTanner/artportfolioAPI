@@ -11,8 +11,7 @@ export function checkStatus() {
 export function logout() {
    const _id = sessionStorage.getItem('_id');
    sessionStorage.removeItem('loggedIn');
-   sessionStorage.removeItem('_id');
-   window.location.replace('/' + _id);
+   window.location.replace('../index.html' + '?' + _id);
 }
 
 var el = document.getElementById('loginSubmit');
@@ -44,7 +43,7 @@ if (document.getElementById('loginSubmit')) {
       if (data.success == true) {
          sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
-         window.location.replace('index.html' + '?' + data._id);
+         window.location.replace('../index.html' + '?' + data._id);
       }
    });
 }
