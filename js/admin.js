@@ -30,6 +30,7 @@ export async function logout() {
       return true;
    } else {
       window.location.replace('../index.html' + '?' + _id);
+      console.log("here 3");
       return false;
    }
 
@@ -69,6 +70,7 @@ if (document.getElementById('loginSubmit')) {
          sessionStorage.setItem('_id', data._id);
          console.log("admin: "+ data._id);
          window.location.replace('../index.html' + '?' + data._id);
+         console.log("here 4");
       }
    });
 }

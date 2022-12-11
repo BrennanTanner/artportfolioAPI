@@ -228,6 +228,42 @@ margin-right: auto;
    
 }
 
+ 
+ /* The message box is shown when the user clicks on the password field */
+ #message {
+   display:none;
+   color: #888;
+   position: relative;
+   padding: 5px;
+ }
+ 
+ #message p {
+   padding: 0px 38px;
+   font-size: 12px;
+ }
+ 
+ /* Add a green text color and a checkmark when the requirements are right */
+ .valid {
+   color: green;
+ }
+ 
+ .valid:before {
+   position: relative;
+   left: -35px;
+   content: '\2713';
+ }
+ 
+ /* Add a red text color and an "x" icon when the requirements are wrong */
+ .invalid {
+   color: red;
+ }
+ 
+ .invalid:before {
+   position: relative;
+   left: -35px;
+   content: "✖";
+ }
+
 #footer {
 text-align: center;
 }

@@ -35,10 +35,12 @@ export function checkURL() {
   else if (!_id) {
       if (path == 'login') {
       } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
-         window.location.replace('../login/index.html');
+         window.location.replace('./login/index.html');
+         console.log("here 1");
       } else {
          if (!pathId) {
-            window.location.replace('./login/index.html');
+            window.location.replace('../login/index.html');
+            console.log("here 2");
          } else {
             sessionStorage.setItem('_id', pathId);
             console.log("utils 2 "+pathId);
