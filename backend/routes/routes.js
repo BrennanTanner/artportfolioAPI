@@ -83,7 +83,7 @@ router.get('/status/:id', async (req, res) => {
    }
 });
 
-router.patch('/logout', async (req, res) => {
+router.patch('/logout/:id', async (req, res) => {
    try {
       const updatedData = { isLoggedIn: false};
       const options = { new: true };

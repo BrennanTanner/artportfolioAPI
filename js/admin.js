@@ -1,7 +1,7 @@
 export async function checkStatus() {
-
+   const _id = sessionStorage.getItem('_id');
    const response = await fetch(
-      'https://artportfolio.onrender.com/api/status'
+      'https://artportfolio.onrender.com/api/status/' + _id
    );
 
    if (response.isLoggedIn == 'true') {
@@ -17,7 +17,7 @@ export async function logout() {
    let bodyContent = { isLoggedIn: false};
 
    const response = await fetch(
-      'https://artportfolio.onrender.com/api/logout',
+      'https://artportfolio.onrender.com/api/logout/' + _id,
       {
          method: 'PATCH',
          body: bodyContent,
