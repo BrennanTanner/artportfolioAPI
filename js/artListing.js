@@ -1,3 +1,5 @@
+import { checkStatus } from "./admin";
+
 export default class ArtListing {
    constructor(dataSource) {
       this.dataSource = dataSource;
@@ -8,7 +10,7 @@ export default class ArtListing {
 
       const template = document.querySelector('.art-collection');
 
-      let status = sessionStorage.getItem('loggedIn');
+      let status = checkStatus();
 
       document.getElementById('loading').setAttribute('style', 'display:none;');
 

@@ -17,6 +17,10 @@ const artistSchema = mongoose.Schema({
       type: String,
       required: true
     },
+    isLoggedIn: {
+      required: true,
+      type: Boolean,
+    },
    profileImg: {
       required: true,
       type: String,

@@ -1,19 +1,38 @@
-import { loadNavTitle } from "./utils";
+export async function checkStatus() {
 
-export function checkStatus() {
-   const status = sessionStorage.getItem('loggedIn');
+   const response = await fetch(
+      'https://artportfolio.onrender.com/api/status'
+   );
 
-   if (status == 'true') {
+   if (response.isLoggedIn == 'true') {
       return true;
    } else {
       return false;
    }
 }
 
-export function logout() {
+export async function logout() {
    const _id = sessionStorage.getItem('_id');
-   sessionStorage.removeItem('loggedIn');
-   window.location.replace('../index.html' + '?' + _id);
+
+   let bodyContent = { isLoggedIn: false};
+
+   const response = await fetch(
+      'https://artportfolio.onrender.com/api/logout',
+      {
+         method: 'PATCH',
+         body: bodyContent,
+         headers: headersList,
+      }
+   );
+
+   const status = response.isLoggedIn;
+   if (status == 'true') {
+      return true;
+   } else {
+      window.location.replace('../index.html' + '?' + _id);
+      return false;
+   }
+
 }
 
 var el = document.getElementById('loginSubmit');
@@ -47,7 +66,6 @@ if (document.getElementById('loginSubmit')) {
 
       let data = await response.json();
       if (data.success == true) {
-         sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
          window.location.replace('../index.html' + '?' + data._id);
       }

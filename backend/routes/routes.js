@@ -47,18 +47,24 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
 });
 
 //login
-router.post('/login', upload.single('image'), async (req, response) => {
+router.patch('/login', upload.single(''), async (req, response) => {
    const username = req.body.username;
    const password = req.body.password;
 
+   const updatedData = { isLoggedIn: true};
+      const options = { new: true };
    const user = await Model.findOne({ username: username });
 
-   bcrypt.compare(password, user.password, function (err, res) {
+   bcrypt.compare(password, user.password, async function (err, res) {
       if (err) {
          // handle error
       }
       if (res) {
          // Send JWT
+         const result = await Model.findByIdAndUpdate(user._id, updatedData, options);
+
+         res.send(result);
+
          return response.json({ success: true, _id: user._id,  message: 'passwords match' });
       } else {
          // response is OutgoingMessage object that server response http request
@@ -68,6 +74,28 @@ router.post('/login', upload.single('image'), async (req, response) => {
          });
       }
    });
+});
+
+router.get('/status', async (req, res) => {
+   try {
+      const data = await Model.findById(req.params.id);
+      res.json(data);
+   } catch (error) {
+      res.status(500).json({ message: error.message });
+   }
+});
+
+router.patch('/logout', async (req, res) => {
+   try {
+      const updatedData = { isLoggedIn: false};
+      const options = { new: true };
+
+      const result = await Model.findByIdAndUpdate(req.params.id, updatedData, options);
+
+      res.send(result);
+   } catch (error) {
+      res.status(500).json({ message: error.message });
+   }
 });
 
 //add a new piece method
@@ -116,14 +144,14 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
 });
 
 //Get all Method
-router.get('/getAll', async (req, res) => {
-   try {
-      const data = await Model.find();
-      res.json(data);
-   } catch (error) {
-      res.status(500).json({ message: error.message });
-   }
-});
+// router.get('/getAll', async (req, res) => {
+//    try {
+//       const data = await Model.find();
+//       res.json(data);
+//    } catch (error) {
+//       res.status(500).json({ message: error.message });
+//    }
+// });
 
 //Get by ID Method
 router.get('/get/:id', async (req, res) => {
