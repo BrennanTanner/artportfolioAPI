@@ -1,3 +1,5 @@
+import { loadNavTitle } from "./utils";
+
 export function checkStatus() {
    const status = sessionStorage.getItem('loggedIn');
 

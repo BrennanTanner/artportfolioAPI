@@ -130,18 +130,15 @@ export async function loadHeaderFooter() {
 export async function loadNavTitle(dataSource) {
    const list = await dataSource.getOwnersData();
 
-   const headerTemplate = document.querySelector('.divider');
+   const headerTemplate = document.querySelector('.title');
 
+   console.log(headerTemplate);
    const createHeaderTitle = document.createElement('h1');
 
    createHeaderTitle.className = 'nav-title';
 
    headerTemplate.appendChild(createHeaderTitle);
 
-   if (!list.firstN) {
-      createHeaderTitle.textContent = 'ART PORTFOLIO';
-   } else {
-      createHeaderTitle.textContent =
-         list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
-   }
+   createHeaderTitle.textContent =
+      list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
 }
