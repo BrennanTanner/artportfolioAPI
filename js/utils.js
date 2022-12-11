@@ -30,11 +30,11 @@ export function checkURL() {
    const _id = sessionStorage.getItem('_id');
    if (!_id) {
       if (path == 'login') {
-      } else if ((path != 'about' && path != 'gallery') || path == 'newPiece') {
+      } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
          window.location.replace('../login/index.html');
       } else {
          if (!pathId) {
-            window.location.replace('../login/index.html');
+            window.location.replace('./login/index.html');
          } else {
             sessionStorage.setItem('_id', pathId);
          }
