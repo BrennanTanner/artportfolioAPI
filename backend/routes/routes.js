@@ -4,20 +4,17 @@ const Model = require('../models/model');
 const cloudinary = require('../utils/cloudinary');
 const bcrypt = require('bcryptjs');
 const upload = require('../utils/multer');
-const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
-
-const JWT_SECRET = process.env.jwt;
 
 //new user method
 router.post('/newartist', upload.single('image'), async (req, res) => {
    const username = req.body.username;
    const user = await Model.findOne({ username: username });
-   if (user) {
+   if (user){
       return res.json({
          success: false,
-         message: 'Username already taken',
+         message: 'Username already taken'
       });
    }
 
@@ -25,6 +22,7 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
    const result = await cloudinary.uploader.upload(req.file.path);
 
    const password = req.body.password;
+
 
    const hashedPassword = await bcrypt.hash(password, 12);
    // Create new user
@@ -54,8 +52,8 @@ router.patch('/login', upload.single(''), async (req, response) => {
    const username = req.body.username;
    const password = req.body.password;
 
-   const updatedData = { isLoggedIn: true };
-   const options = { new: true };
+   const updatedData = { isLoggedIn: true};
+      const options = { new: true };
    const user = await Model.findOne({ username: username });
 
    bcrypt.compare(password, user.password, async function (err, res) {
@@ -64,44 +62,23 @@ router.patch('/login', upload.single(''), async (req, response) => {
       }
       if (res) {
          // Send JWT
-         token = jwt.sign({id:user._id,username:user.username,type:'user'},JWT_SECRET,{ expiresIn: '2h'})
+         const result = await Model.findByIdAndUpdate(user._id, updatedData, options);
 
-         res.cookie('token', token, {
-            maxAge: 2 * 60 * 60 * 1000,
-            httpOnly: true,
-         });
-         // maxAge: 2 hours
-         res.redirect('/');
-         const result = await Model.findByIdAndUpdate(
-            user._id,
-            updatedData,
-            options
-         );
-
-         return response.json({
-            success: true,
-            _id: user._id,
-            message: 'passwords match',
-         });
+         return response.json({ success: true, _id: user._id,  message: 'passwords match' });
       } else {
          // response is OutgoingMessage object that server response http request
          return response.json({
             success: false,
-            message: 'passwords do not match',
+            message: 'passwords do not match'
          });
       }
    });
 });
 
 router.get('/status/:id', async (req, res) => {
-   const { token } = req.cookies;
    try {
-      if (verifyToken(token)) {
-         const data = await Model.findById(req.params.id);
-         res.send(data.isLoggedIn);
-      } else {
-         res.send({ message: "'JWT' does not match" });
-      }
+      const data = await Model.findById(req.params.id);
+      res.send(data.isLoggedIn);
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -109,16 +86,12 @@ router.get('/status/:id', async (req, res) => {
 
 router.patch('/logout/:id', async (req, res) => {
    try {
-      const updatedData = { isLoggedIn: false };
+      const updatedData = { isLoggedIn: false};
       const options = { new: true };
 
-      const result = await Model.findByIdAndUpdate(
-         req.params.id,
-         updatedData,
-         options
-      );
+      const result = await Model.findByIdAndUpdate(req.params.id, updatedData, options);
 
-      res.json({ isLoggedIn: result.isLoggedIn });
+      res.json({ isLoggedIn: result.isLoggedIn});
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -127,7 +100,6 @@ router.patch('/logout/:id', async (req, res) => {
 //add a new piece method
 router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
    try {
-      if (verifyToken(token)) {
       const id = req.params.id;
       const oldPiece = req.body;
 
@@ -163,20 +135,14 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
       pieces.pieces.push(newPiece);
       const result = await pieces.save();
       res.send(result);
-   }
-   else {
-      res.send({ message: "'JWT' does not match" });
-   }
    } catch (error) {
-      res.status(400).json({
+      res.status(400).json({ 
          success: false,
-         message: error.message,
-      });
-   
+         message: error.message });
    }
 });
 
-//Get by id Method
+//Get all Method
 // router.get('/getAll', async (req, res) => {
 //    try {
 //       const data = await Model.find();
@@ -189,13 +155,8 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
 //Get by ID Method
 router.get('/get/:id', async (req, res) => {
    try {
-      if (verifyToken(token)) {
       const data = await Model.findById(req.params.id);
       res.json(data);
-   }
-   else {
-      res.send({ message: "'JWT' does not match" });
-   }
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -204,7 +165,6 @@ router.get('/get/:id', async (req, res) => {
 //Update by ID Method
 router.patch('/update/:id', async (req, res) => {
    try {
-      if (verifyToken(token)) {
       const id = req.params.id;
       const updatedData = req.body;
       const options = { new: true };
@@ -212,10 +172,6 @@ router.patch('/update/:id', async (req, res) => {
       const result = await Model.findByIdAndUpdate(id, updatedData, options);
 
       res.send(result);
-   }
-   else {
-      res.send({ message: "'JWT' does not match" });
-   }
    } catch (error) {
       res.status(400).json({ message: error.message });
    }
@@ -240,6 +196,7 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
 
       const data = await Model.findById(userId);
 
+
       data.pieces = data.pieces.filter(
          (item) => JSON.stringify(item._id) != pieceId
       );
@@ -250,19 +207,5 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
       res.status(400).json({ message: error.message });
    }
 });
-
-const verifyToken = (token) => {
-   try {
-      const verify = jwt.verify(token, JWT_SECRET);
-      if (verify.type === 'user') {
-         return true;
-      } else {
-         return false;
-      }
-   } catch (error) {
-      console.log(JSON.stringify(error), 'error');
-      return false;
-   }
-};
 
 module.exports = router;

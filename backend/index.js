@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-var cookieParser = require('cookie-parser');
 const mongoString = process.env.DATABASE_URL;
 const routes = require('./routes/routes');
 const PORT = process.env.PORT || 3030;
@@ -21,7 +20,7 @@ database.once('connected', () => {
 })
 const app = express();
 
-app.use(cookieParser());
+
 
 app.use(cors());
 
