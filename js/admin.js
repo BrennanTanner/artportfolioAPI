@@ -58,7 +58,7 @@ if (document.getElementById('loginSubmit')) {
       let response = await fetch(
          'https://artportfolio.onrender.com/api/login/',
          {
-            method: 'POST',
+            method: 'PATCH',
             body: bodyContent,
             headers: headersList,
          }

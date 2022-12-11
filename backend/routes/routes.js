@@ -63,8 +63,6 @@ router.patch('/login', upload.single(''), async (req, response) => {
          // Send JWT
          const result = await Model.findByIdAndUpdate(user._id, updatedData, options);
 
-         res.send(result);
-
          return response.json({ success: true, _id: user._id,  message: 'passwords match' });
       } else {
          // response is OutgoingMessage object that server response http request
@@ -76,10 +74,10 @@ router.patch('/login', upload.single(''), async (req, response) => {
    });
 });
 
-router.get('/status', async (req, res) => {
+router.get('/status/:id', async (req, res) => {
    try {
       const data = await Model.findById(req.params.id);
-      res.json(data);
+      res.json(data.isLoggedIn);
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

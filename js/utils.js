@@ -132,7 +132,6 @@ export async function loadNavTitle(dataSource) {
 
    const headerTemplate = document.querySelector('.title');
 
-   console.log(headerTemplate);
    const createHeaderTitle = document.createElement('h1');
 
    createHeaderTitle.className = 'nav-title';
