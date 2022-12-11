@@ -26,9 +26,13 @@ export function renderWithTemplate(template, parent, data, callback) {
 export function checkURL() {
    const path = getLocationFromUrl();
    const pathId = getIdFromUrl();
-
    const _id = sessionStorage.getItem('_id');
-   if (!_id) {
+
+   if(_id == undefined && pathId != _id){
+      sessionStorage.setItem('_id', pathId);
+      console.log("utils 1 "+pathId);
+   }
+  else if (!_id) {
       if (path == 'login') {
       } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
          window.location.replace('../login/index.html');
@@ -37,6 +41,7 @@ export function checkURL() {
             window.location.replace('./login/index.html');
          } else {
             sessionStorage.setItem('_id', pathId);
+            console.log("utils 2 "+pathId);
          }
       }
    } else {
@@ -80,7 +85,7 @@ export function getIdFromUrl() {
 }
 
 export async function loadHeaderFooter() {
-   const loggedIn = checkStatus();
+   const loggedIn = await checkStatus();
 
    const header = await loadTemplate('../partials/header.html');
    const footer = await loadTemplate('../partials/footer.html');

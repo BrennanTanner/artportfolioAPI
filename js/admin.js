@@ -67,6 +67,7 @@ if (document.getElementById('loginSubmit')) {
       let data = await response.json();
       if (data.success == true) {
          sessionStorage.setItem('_id', data._id);
+         console.log("admin: "+ data._id);
          window.location.replace('../index.html' + '?' + data._id);
       }
    });

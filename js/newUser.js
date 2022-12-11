@@ -46,7 +46,6 @@ if (document.getElementById('userSubmit')) {
       );
 
       let data = await response.json();
-      console.log(data.success);
       if (data.success == false) {
          document
             .getElementById('matchingUser')
@@ -55,8 +54,8 @@ if (document.getElementById('userSubmit')) {
                'display: inline; color: red; font-size: smaller;'
             );
       } else {
-         sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
+         console.log("newUser"+data._id);
          window.location.replace('index.html' + '?' + data._id);
       }
    });

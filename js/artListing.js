@@ -33,7 +33,7 @@ export default class ArtListing {
    }
 
    artPieceTemplate(element) {
-      const scale = 'w_250,h_300,c_fill';
+      const scale = 'w_350,h_500,c_fill';
 
       var UrlArray = element.img.split('/');
       UrlArray.splice(6, 0, scale);
@@ -47,8 +47,4 @@ export default class ArtListing {
 
       return artSection;
    }
-
-   //    setLocalStorageId(id) {
-   //       localStorage.setItem('author', id);
-   //    }
 }

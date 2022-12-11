@@ -4,7 +4,6 @@ const Model = require('../models/model');
 const cloudinary = require('../utils/cloudinary');
 const bcrypt = require('bcryptjs');
 const upload = require('../utils/multer');
-const { model } = require('mongoose');
 require('dotenv').config();
 
 //new user method
@@ -31,6 +30,7 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
       lastN: req.body.lastN,
       username: req.body.username,
       password: hashedPassword,
+      isLoggedIn: true,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       aboutMe: req.body.aboutMe,
@@ -90,7 +90,7 @@ router.patch('/logout/:id', async (req, res) => {
 
       const result = await Model.findByIdAndUpdate(req.params.id, updatedData, options);
 
-      res.send(result);
+      res.json({ isLoggedIn: result.isLoggedIn});
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

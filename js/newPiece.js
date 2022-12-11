@@ -11,7 +11,6 @@ export function addDraftElement() {
       draftMessage.style.display = 'inline';
    } else {
       draftSection.innerHTML += `<input type="file" id="draftImage${counter}" name="image" accept="image/png, image/jpeg" required/><br />`;
-      console.log(counter);
       counter++;
    }
 }
@@ -36,8 +35,6 @@ if (document.getElementById('pieceSubmit')) {
       let bodyContent = new FormData();
 
       //fd.append("file", document.getElementById('file1').files[0]);
-
-      console.log('# of files: ' + counter);
 
       bodyContent.append('title', document.getElementById('title').value);
       bodyContent.append(
@@ -65,11 +62,6 @@ if (document.getElementById('pieceSubmit')) {
             'image',
             document.getElementById('draftImage' + i).files[0]
          );
-         console.log(
-            'draftImage: ' + document.getElementById('draftImage' + i)
-         );
-         console.log('counter: ' + counter);
-         console.log('index: ' + i);
       }
 
       let response = await fetch(

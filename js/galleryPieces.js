@@ -11,7 +11,6 @@ export default class ArtListing {
       document.getElementById('loading').setAttribute('style', 'display:none;');
 
       list.pieces.forEach((element) => {
-         console.log(element);
          template.append(this.artPieceTemplate(element));
       });
    }
