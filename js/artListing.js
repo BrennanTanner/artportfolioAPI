@@ -6,47 +6,28 @@ export default class ArtListing {
    async init() {
       const list = await this.dataSource.getOwnersData();
 
-      //const authorId = sessionStorage.getItem('_id');
-
       const template = document.querySelector('.art-collection');
 
-      const headerTemplate = document.querySelector('.divider');
-
-      const createHeaderTitle = document.createElement('h1');
-   
-      
-      createHeaderTitle.className = 'nav-title';
       let status = sessionStorage.getItem('loggedIn');
-      
-      headerTemplate.appendChild(createHeaderTitle);
 
-document.getElementById("loading").setAttribute("style", "display:none;");
+      document.getElementById('loading').setAttribute('style', 'display:none;');
 
       if (list.pieces) {
-
-         createHeaderTitle.textContent = list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
-        list.pieces.forEach((element) => {
+         list.pieces.forEach((element) => {
             template.append(this.artPieceTemplate(element));
          });
-
-      }
-      else if (status == "true"){
-         createHeaderTitle.textContent = list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
-        
-        template.innerHTML=`
+      } else if (status == 'true') {
+         template.innerHTML = `
         <h2>Looks like there's nothing here!</h2>
         <p>Try clicking the "+" to add a piece and start your portfolio</p>`;
-      }
-      else{
-         createHeaderTitle.textContent = "Art Portfolio";
-        template.innerHTML=`
+      } else {
+         createHeaderTitle.textContent = 'Art Portfolio';
+         template.innerHTML = `
         <h2>Looks like there's nothing here!</h2>
         <p>This artist hasn't uploaded a piece yet. Try checking later.</p>`;
       }
 
       //createUsersTitle(list);
-
-
    }
 
    artPieceTemplate(element) {
@@ -65,7 +46,7 @@ document.getElementById("loading").setAttribute("style", "display:none;");
       return artSection;
    }
 
-//    setLocalStorageId(id) {
-//       localStorage.setItem('author', id);
-//    }
+   //    setLocalStorageId(id) {
+   //       localStorage.setItem('author', id);
+   //    }
 }

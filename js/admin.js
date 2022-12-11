@@ -19,8 +19,12 @@ if (document.getElementById('loginSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
-      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
-      document.querySelector('#loginSubmit').setAttribute("style", "display: none;");
+      document
+         .querySelector('.lds-roller')
+         .setAttribute('style', 'z-index: 1;');
+      document
+         .querySelector('#loginSubmit')
+         .setAttribute('style', 'display: none;');
 
       let headersList = {
          Accept: '*/*',

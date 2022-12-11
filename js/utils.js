@@ -29,28 +29,24 @@ export function checkURL() {
 
    const _id = sessionStorage.getItem('_id');
    if (!_id) {
-      if (path == 'login'){
-         
-      } else if (
-         path != 'about' &&
-         path != 'gallery' ||  path == 'newPiece'
-      ) {
+      if (path == 'login') {
+      } else if ((path != 'about' && path != 'gallery') || path == 'newPiece') {
          window.location.replace('../login/index.html');
-      }else{
-         if(!pathId){
+      } else {
+         if (!pathId) {
             window.location.replace('../login/index.html');
-         }
-         else{
+         } else {
             sessionStorage.setItem('_id', pathId);
          }
       }
    } else {
- if (
+      if (
          path == 'about' ||
-         path == 'gallery' ||  path == 'newPiece' || path == 'login'
+         path == 'gallery' ||
+         path == 'newPiece' ||
+         path == 'login'
       ) {
-
-      }else{
+      } else {
          //window.location.replace('?' + _id);
       }
    }
@@ -129,4 +125,23 @@ export async function loadHeaderFooter() {
    menuItems.forEach(function (menuItem) {
       menuItem.addEventListener('click', toggleMenu);
    });
+}
+
+export async function loadNavTitle(dataSource) {
+   const list = await dataSource.getOwnersData();
+
+   const headerTemplate = document.querySelector('.divider');
+
+   const createHeaderTitle = document.createElement('h1');
+
+   createHeaderTitle.className = 'nav-title';
+
+   headerTemplate.appendChild(createHeaderTitle);
+
+   if (!list.firstN) {
+      createHeaderTitle.textContent = 'ART PORTFOLIO';
+   } else {
+      createHeaderTitle.textContent =
+         list.firstN.toUpperCase() + ' ' + list.lastN.toUpperCase();
+   }
 }

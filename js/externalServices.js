@@ -12,60 +12,53 @@ export default class ExternalServices {
    constructor() {}
 
    async getOwnersData() {
-
-
       const id = sessionStorage.getItem('_id');
-      
+
       return await fetch(baseURL + `api/get/${id}`)
          .then(convertToJson)
          .then((data) => data);
    }
-   
 
-   
+   //  async checkout() {
+   //     const formElement = document.forms['img'];
 
-  //  async checkout() {
-  //     const formElement = document.forms['img'];
+   //     console.log(formElement);
+   //     try {
+   //         // select file input
+   //         const input = document.getElementById('avatar');
 
-  //     console.log(formElement);
-  //     try {
-  //         // select file input
-  //         const input = document.getElementById('avatar');
+   //         // add event listener
+   //         input.addEventListener('change', () => {
+   //            uploadFile(input.files[0]);
+   //            console.log("file changed" + input.files[0]);
+   //         });
 
-  //         // add event listener
-  //         input.addEventListener('change', () => {
-  //            uploadFile(input.files[0]);
-  //            console.log("file changed" + input.files[0]);
-  //         });
- 
-  //         const uploadFile = (file) => {
-  //            // add the file to the FormData object
-  //            const fd = new FormData();
-  //            fd.append('avatar', file);
-  //            console.log("file appended" + fd);
- 
-  //            // send `POST` request
-  //            fetch('https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5&action=upload&source=FILES["file"]&format=json', {
-  //               method: 'POST',
-  //               body: file,
-  //            })
-  //               .then((res) => res.json())
-  //               .then((json) => console.log(json))
-  //               .catch((err) => console.error(err));
-  //         };
-  //        //.then((data) => data);
-  //        console.log(res);
-  //     } catch (err) {
-  //        // get rid of any preexisting alerts.
-  //        for (let message in err.message) {
-  //        }
+   //         const uploadFile = (file) => {
+   //            // add the file to the FormData object
+   //            const fd = new FormData();
+   //            fd.append('avatar', file);
+   //            console.log("file appended" + fd);
 
-  //        console.log(err);
-  //     }
-  //  }
+   //            // send `POST` request
+   //            fetch('https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5&action=upload&source=FILES["file"]&format=json', {
+   //               method: 'POST',
+   //               body: file,
+   //            })
+   //               .then((res) => res.json())
+   //               .then((json) => console.log(json))
+   //               .catch((err) => console.error(err));
+   //         };
+   //        //.then((data) => data);
+   //        console.log(res);
+   //     } catch (err) {
+   //        // get rid of any preexisting alerts.
+   //        for (let message in err.message) {
+   //        }
 
+   //        console.log(err);
+   //     }
+   //  }
 
-  
    //   async checkout(payload) {
    //     const options = {
    //       method: 'POST',

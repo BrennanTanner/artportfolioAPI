@@ -21,8 +21,12 @@ if (document.getElementById('pieceSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
-      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
-      document.querySelector('#pieceSubmit').setAttribute("style", "display: none;");
+      document
+         .querySelector('.lds-roller')
+         .setAttribute('style', 'z-index: 1;');
+      document
+         .querySelector('#pieceSubmit')
+         .setAttribute('style', 'display: none;');
 
       let headersList = {
          Accept: '*/*',
@@ -76,7 +80,6 @@ if (document.getElementById('pieceSubmit')) {
             headers: headersList,
          }
       );
-
 
       let data = await response.json();
       if (data.success != false) {

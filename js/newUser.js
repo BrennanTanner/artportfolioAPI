@@ -3,8 +3,12 @@ if (document.getElementById('userSubmit')) {
    el.addEventListener('click', async function (e) {
       e.preventDefault();
 
-      document.querySelector('.lds-roller').setAttribute("style", "z-index: 1;");
-      document.querySelector('#userSubmit').setAttribute("style", "display: none;");
+      document
+         .querySelector('.lds-roller')
+         .setAttribute('style', 'z-index: 1;');
+      document
+         .querySelector('#userSubmit')
+         .setAttribute('style', 'display: none;');
 
       let headersList = {
          Accept: '*/*',
@@ -19,7 +23,10 @@ if (document.getElementById('userSubmit')) {
       bodyContent.append('firstN', document.getElementById('firstN').value);
       bodyContent.append('lastN', document.getElementById('lastN').value);
       bodyContent.append('email', document.getElementById('email').value);
-      bodyContent.append('phoneNumber', document.getElementById('phoneNumber').value);
+      bodyContent.append(
+         'phoneNumber',
+         document.getElementById('phoneNumber').value
+      );
       //about me
       bodyContent.append('aboutMe', document.getElementById('aboutMe').value);
       //profile pic
@@ -29,19 +36,25 @@ if (document.getElementById('userSubmit')) {
       );
 
       //http://localhost:3030/
-      let response = await fetch('https://artportfolio.onrender.com/api/newartist', {
-         method: 'POST',
-         body: bodyContent,
-         headers: headersList,
-      });
+      let response = await fetch(
+         'https://artportfolio.onrender.com/api/newartist',
+         {
+            method: 'POST',
+            body: bodyContent,
+            headers: headersList,
+         }
+      );
 
       let data = await response.json();
       console.log(data.success);
       if (data.success == false) {
-         document.getElementById("matchingUser").setAttribute("style", "display: inline; color: red; font-size: smaller;")
-      }
-      
-      else{
+         document
+            .getElementById('matchingUser')
+            .setAttribute(
+               'style',
+               'display: inline; color: red; font-size: smaller;'
+            );
+      } else {
          sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
          window.location.replace('index.html' + '?' + data._id);
