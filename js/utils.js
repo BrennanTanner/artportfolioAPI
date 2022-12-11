@@ -27,22 +27,23 @@ export function checkURL() {
    const path = getLocationFromUrl();
    const pathId = getIdFromUrl();
    const _id = sessionStorage.getItem('_id');
+   const status = checkStatus();
 
    if (_id == undefined && pathId != _id) {
       sessionStorage.setItem('_id', pathId);
-      console.log('utils 1 ' + pathId);
+
    } else if (!_id) {
       if (path == 'login') {
       } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
          window.location.replace('./login/index.html');
-         console.log('here 1');
+
       } else {
          if (!pathId) {
             window.location.replace('../login/index.html');
-            console.log('here 2');
+
          } else {
             sessionStorage.setItem('_id', pathId);
-            console.log('utils 2 ' + pathId);
+
          }
       }
    } else {
@@ -97,9 +98,21 @@ export async function loadHeaderFooter() {
    ) {
       const header = await loadTemplate('../partials/header.html');
       const footer = await loadTemplate('../partials/footer.html');
+      
+      const headerElement = document.getElementById('main-header');
+      const footerElement = document.getElementById('main-footer');
+   
+      renderWithTemplate(header, headerElement);
+      renderWithTemplate(footer, footerElement);
    } else {
       const header = await loadTemplate('./partials/header.html');
       const footer = await loadTemplate('./partials/footer.html');
+
+      const headerElement = document.getElementById('main-header');
+      const footerElement = document.getElementById('main-footer');
+   
+      renderWithTemplate(header, headerElement);
+      renderWithTemplate(footer, footerElement);
    }
 
 
