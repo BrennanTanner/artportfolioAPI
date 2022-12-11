@@ -4,7 +4,8 @@ export async function checkStatus() {
       'https://artportfolio.onrender.com/api/status/' + _id
    );
 
-   if (response.isLoggedIn == 'true') {
+   console.log(response);
+   if (response == 'true') {
       return true;
    } else {
       return false;
@@ -14,13 +15,10 @@ export async function checkStatus() {
 export async function logout() {
    const _id = sessionStorage.getItem('_id');
 
-   let bodyContent = { isLoggedIn: false};
-
    const response = await fetch(
       'https://artportfolio.onrender.com/api/logout/' + _id,
       {
          method: 'PATCH',
-         body: bodyContent,
          headers: headersList,
       }
    );
@@ -30,7 +28,6 @@ export async function logout() {
       return true;
    } else {
       window.location.replace('../index.html' + '?' + _id);
-      console.log("here 3");
       return false;
    }
 
@@ -68,9 +65,7 @@ if (document.getElementById('loginSubmit')) {
       let data = await response.json();
       if (data.success == true) {
          sessionStorage.setItem('_id', data._id);
-         console.log("admin: "+ data._id);
          window.location.replace('../index.html' + '?' + data._id);
-         console.log("here 4");
       }
    });
 }

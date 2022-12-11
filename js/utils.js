@@ -29,10 +29,7 @@ export function checkURL() {
    const _id = sessionStorage.getItem('_id');
    const status = checkStatus();
 
-   if (_id == undefined && pathId != _id) {
-      sessionStorage.setItem('_id', pathId);
-
-   } else if (!_id) {
+if (!_id) {
       if (path == 'login') {
       } else if (path == 'newPiece' || (path != 'about' && path != 'gallery')) {
          window.location.replace('./login/index.html');
@@ -45,16 +42,6 @@ export function checkURL() {
             sessionStorage.setItem('_id', pathId);
 
          }
-      }
-   } else {
-      if (
-         path == 'about' ||
-         path == 'gallery' ||
-         path == 'newPiece' ||
-         path == 'login'
-      ) {
-      } else {
-         //window.location.replace('?' + _id);
       }
    }
 }
@@ -88,6 +75,7 @@ export function getIdFromUrl() {
 
 export async function loadHeaderFooter() {
    const loggedIn = await checkStatus();
+   console.log(loggedIn);
    const path = getLocationFromUrl();
 
    if (
@@ -98,12 +86,16 @@ export async function loadHeaderFooter() {
    ) {
       const header = await loadTemplate('../partials/header.html');
       const footer = await loadTemplate('../partials/footer.html');
-      
+
       const headerElement = document.getElementById('main-header');
       const footerElement = document.getElementById('main-footer');
-   
+
       renderWithTemplate(header, headerElement);
       renderWithTemplate(footer, footerElement);
+
+      document.getElementById('menuHome').setAttribute('href', '../index.html' )
+      document.getElementById('menuGallery').setAttribute('href', '../gallery/index.html' )
+      document.getElementById('menuAbout').setAttribute('href', '../about/index.html' )
    } else {
       const header = await loadTemplate('./partials/header.html');
       const footer = await loadTemplate('./partials/footer.html');
@@ -113,14 +105,11 @@ export async function loadHeaderFooter() {
    
       renderWithTemplate(header, headerElement);
       renderWithTemplate(footer, footerElement);
+
+      document.getElementById('menuHome').setAttribute('href', './index.html' )
+      document.getElementById('menuGallery').setAttribute('href', './gallery/index.html' )
+      document.getElementById('menuAbout').setAttribute('href', './about/index.html' )
    }
-
-
-   const headerElement = document.getElementById('main-header');
-   const footerElement = document.getElementById('main-footer');
-
-   renderWithTemplate(header, headerElement);
-   renderWithTemplate(footer, footerElement);
 
    if (loggedIn) {
       document.getElementById('userControls').style.display = 'block';

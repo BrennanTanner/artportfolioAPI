@@ -77,7 +77,7 @@ router.patch('/login', upload.single(''), async (req, response) => {
 router.get('/status/:id', async (req, res) => {
    try {
       const data = await Model.findById(req.params.id);
-      res.json(data.isLoggedIn);
+      res.send(data.isLoggedIn);
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
