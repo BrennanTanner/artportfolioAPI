@@ -94,6 +94,7 @@ export async function loadHeaderFooter() {
       document.getElementById('menuHome').setAttribute('href', '../index.html' )
       document.getElementById('menuGallery').setAttribute('href', '../gallery/index.html' )
       document.getElementById('menuAbout').setAttribute('href', '../about/index.html' )
+      document.getElementById('logo').setAttribute('src', '../public/Artboard 3.svg' )
    } else {
       const header = await loadTemplate('./partials/header.html');
       const footer = await loadTemplate('./partials/footer.html');
@@ -107,6 +108,7 @@ export async function loadHeaderFooter() {
       document.getElementById('menuHome').setAttribute('href', './index.html' )
       document.getElementById('menuGallery').setAttribute('href', './gallery/index.html' )
       document.getElementById('menuAbout').setAttribute('href', './about/index.html' )
+      document.getElementById('logo').setAttribute('src', './public/Artboard 3.svg' )
    }
 
    if (loggedIn) {
