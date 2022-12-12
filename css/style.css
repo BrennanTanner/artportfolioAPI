@@ -149,6 +149,7 @@ a {
  flex-wrap: wrap;
 
 }
+
 .art-items {
    width: 28vw;
    text-align: center;
@@ -165,6 +166,39 @@ a {
 .art-items>img{
    width: 28vw;
 }
+
+.gallery-collection {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap:30px;
+  
+  }
+  
+  .gallery-items {
+     width: 80vw;
+     text-align: center;
+     background-color: #f9f9f9;
+  }
+  .gallery-items h1 {
+   font-size: 1.5em;
+   text-align: center;
+   font-weight: 300;
+   margin-bottom: 0;
+   color: var(--dark-grey);
+   font-size: 35pt;
+}
+  
+  .gallery-items p{
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .gallery-items>img{
+     width: 50vw;
+  }
 
 .gallery-image-content{
    display: flex;

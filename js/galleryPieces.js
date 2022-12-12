@@ -6,7 +6,7 @@ export default class ArtListing {
    async init() {
       const list = await this.dataSource.getOwnersData();
 
-      const template = document.querySelector('.art-collection');
+      const template = document.querySelector('.gallery-collection');
 
       document.getElementById('loading').setAttribute('style', 'display:none;');
 
@@ -16,13 +16,6 @@ export default class ArtListing {
    }
 
    artPieceTemplate(element) {
-      let viewportWidth = window.innerWidth;
-      let height = viewportWidth * 1.428571428571429;
-            const scale = 'w_'+viewportWidth+',h_'+height.toFixed(0)+',c_fill';
-      
-            var UrlArray = element.img.split('/');
-            UrlArray.splice(6, 0, scale);
-            const scaledUrl = UrlArray.join('/');
 
       let artSection = document.createElement('div');
       let artTitle = document.createElement('h1');
@@ -31,9 +24,9 @@ export default class ArtListing {
       let artSummary = document.createElement('p');
       let imageArea = document.createElement('div');
 
-      artSection.className = 'art-items';
-      artMainImg.setAttribute('src', scaledUrl);
-      artTitle.textContent = element.title;
+      artSection.className = 'gallery-items';
+      artMainImg.setAttribute('src', element.img);
+      artTitle.textContent = element.title.toUpperCase();
       artMedium.textContent = element.medium;
       artSummary.textContent = element.aboutBody;
       imageArea.className = 'gallery-image-content';
