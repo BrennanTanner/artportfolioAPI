@@ -33,7 +33,10 @@ export default class ArtListing {
    }
 
    artPieceTemplate(element) {
-      const scale = 'w_350,h_500,c_fill';
+
+let viewportWidth = window.innerWidth;
+let height = viewportWidth * 1.428571428571429;
+      const scale = 'w_'+viewportWidth+',h_'+height.toFixed(0)+',c_fill';
 
       var UrlArray = element.img.split('/');
       UrlArray.splice(6, 0, scale);

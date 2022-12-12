@@ -74,7 +74,6 @@ export function getIdFromUrl() {
 
 export async function loadHeaderFooter() {
    const loggedIn = await checkStatus();
-   console.log(loggedIn);
    const path = getLocationFromUrl();
 
    if (

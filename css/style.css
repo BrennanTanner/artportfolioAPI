@@ -184,7 +184,7 @@ a {
 
 .aboutSection{
    background-color: #e7f1f8;
-   height: 300px;
+   height: fit-content;
    display: flex;
    justify-content: space-evenly;
    padding: 15px;
@@ -196,8 +196,8 @@ width: 60%;
 
 .aboutSection img {
    border-radius: 50%;
-max-width: 100%;
-max-height: 80%;
+max-width: 40%;
+max-height: 350px;
 margin-top: auto;
 margin-bottom: auto;
 margin-left: 30px;
@@ -269,6 +269,7 @@ margin-right: auto;
  }
 
 #footer {
+   margin-top: 50px;
 text-align: center;
 }
 #footer img{
@@ -477,6 +478,12 @@ max-width: 7%;
       list-style-type: none;
    }
 
+ .title {
+   width: 100%;
+position: fixed;
+background-color: white;
+   }
+
    .nav-title {
       text-align: center;
       font-weight: 300;
@@ -484,13 +491,72 @@ max-width: 7%;
       color: var(--dark-grey);
    }
 
+
    .art-collection {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-content: center;
       gap: 10px;
+      margin-top: 140px;
    }
    .art-items {
-      text-align: center;
+      width: 90%;
    }
+   .art-items img{
+      width: 100%;
+   }
+
+.aboutSection{
+   margin-top: 140px;
+   background-color: #e7f1f8;
+   height: fit-content;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   padding: 15px;
+   align-items: center;
+}
+
+.aboutSection p{
+width: 80%;
+}
+
+.aboutSection img {
+   border-radius: 50%;
+max-width: 50%;
+max-height: 50%;
+margin-top: auto;
+margin-bottom: auto;
+margin-left: 0px;
+}
+
+.textInfo>p {
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+}
+.textInfo {
+   text-align: center;
+   }
+.contactInfo {
+   display:flex;
+   justify-content: space-around;
+}
+.contactInfo div{
+   margin: 0px 20px;
+   justify-content: space-around;
+   display:flex;
+   align-items: center;
+   
+}
+.contactInfo div p{
+   margin: 20px 0px;
+}
+
+.contactInfo div img{
+   max-height: 50%;
+   
+}
+
 }

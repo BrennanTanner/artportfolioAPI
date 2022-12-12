@@ -16,6 +16,14 @@ export default class ArtListing {
    }
 
    artPieceTemplate(element) {
+      let viewportWidth = window.innerWidth;
+      let height = viewportWidth * 1.428571428571429;
+            const scale = 'w_'+viewportWidth+',h_'+height.toFixed(0)+',c_fill';
+      
+            var UrlArray = element.img.split('/');
+            UrlArray.splice(6, 0, scale);
+            const scaledUrl = UrlArray.join('/');
+
       let artSection = document.createElement('div');
       let artTitle = document.createElement('h1');
       let artMainImg = document.createElement('img');
@@ -24,7 +32,7 @@ export default class ArtListing {
       let imageArea = document.createElement('div');
 
       artSection.className = 'art-items';
-      artMainImg.setAttribute('src', element.img);
+      artMainImg.setAttribute('src', scaledUrl);
       artTitle.textContent = element.title;
       artMedium.textContent = element.medium;
       artSummary.textContent = element.aboutBody;
