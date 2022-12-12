@@ -16,7 +16,11 @@ export default class ArtListing {
 
       if (list.pieces) {
          list.pieces.forEach((element) => {
-            template.append(this.artPieceTemplate(element));
+
+            console.log(element.isFavorite);
+            if(element.isFavorite == 'true'){
+               template.append(this.artPieceTemplate(element));
+            }
          });
       } else if (status == 'true') {
          template.innerHTML = `
