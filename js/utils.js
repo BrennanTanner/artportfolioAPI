@@ -27,7 +27,6 @@ export function checkURL() {
    const path = getLocationFromUrl();
    const pathId = getIdFromUrl();
    const _id = sessionStorage.getItem('_id');
-   const status = checkStatus();
 
 if (!_id) {
       if (path == 'login') {

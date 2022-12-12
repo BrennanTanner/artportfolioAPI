@@ -4,8 +4,11 @@ export async function checkStatus() {
       'https://artportfolio.onrender.com/api/status/' + _id
    );
 
-   console.log(response);
+   console.log("db s: "+JSON.stringify(response));
+   const localLog = sessionStorage.getItem('loggedIn');
+   console.log("local s: "+localLog);
    if (response == 'true') {
+      
       return true;
    } else {
       return false;
@@ -27,7 +30,8 @@ export async function logout() {
    if (status == 'true') {
       return true;
    } else {
-      window.location.replace('../index.html' + '?' + _id);
+      sessionStorage.setItem('loggedIn', false);
+      window.location.replace('../index.html' + '?' + _id);a
       return false;
    }
 
@@ -64,6 +68,7 @@ if (document.getElementById('loginSubmit')) {
 
       let data = await response.json();
       if (data.success == true) {
+         sessionStorage.setItem('loggedIn', true);
          sessionStorage.setItem('_id', data._id);
          window.location.replace('../index.html' + '?' + data._id);
       }
