@@ -11,10 +11,10 @@ require('dotenv').config();
 router.post('/newartist', upload.single('image'), async (req, res) => {
    const username = req.body.username;
    const user = await Model.findOne({ username: username });
-   if (user){
+   if (user) {
       return res.json({
          success: false,
-         message: 'Username already taken'
+         message: 'Username already taken',
       });
    }
 
@@ -22,7 +22,6 @@ router.post('/newartist', upload.single('image'), async (req, res) => {
    const result = await cloudinary.uploader.upload(req.file.path);
 
    const password = req.body.password;
-
 
    const hashedPassword = await bcrypt.hash(password, 12);
    // Create new user
@@ -52,8 +51,8 @@ router.patch('/login', upload.single(''), async (req, response) => {
    const username = req.body.username;
    const password = req.body.password;
 
-   const updatedData = { isLoggedIn: true};
-      const options = { new: true };
+   const updatedData = { isLoggedIn: true };
+   const options = { new: true };
    const user = await Model.findOne({ username: username });
 
    bcrypt.compare(password, user.password, async function (err, res) {
@@ -62,14 +61,22 @@ router.patch('/login', upload.single(''), async (req, response) => {
       }
       if (res) {
          // Send JWT
-         const result = await Model.findByIdAndUpdate(user._id, updatedData, options);
+         const result = await Model.findByIdAndUpdate(
+            user._id,
+            updatedData,
+            options
+         );
 
-         return response.json({ success: true, _id: user._id,  message: 'passwords match' });
+         return response.json({
+            success: true,
+            _id: user._id,
+            message: 'passwords match',
+         });
       } else {
          // response is OutgoingMessage object that server response http request
          return response.json({
             success: false,
-            message: 'passwords do not match'
+            message: 'passwords do not match',
          });
       }
    });
@@ -78,7 +85,7 @@ router.patch('/login', upload.single(''), async (req, response) => {
 router.get('/status/:id', async (req, res) => {
    try {
       const data = await Model.findById(req.params.id);
-      res.json({ isLoggedIn: data.isLoggedIn});
+      res.json({ isLoggedIn: data.isLoggedIn });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -86,12 +93,16 @@ router.get('/status/:id', async (req, res) => {
 
 router.patch('/logout/:id', async (req, res) => {
    try {
-      const updatedData = { isLoggedIn: false};
+      const updatedData = { isLoggedIn: false };
       const options = { new: true };
 
-      const result = await Model.findByIdAndUpdate(req.params.id, updatedData, options);
+      const result = await Model.findByIdAndUpdate(
+         req.params.id,
+         updatedData,
+         options
+      );
 
-      res.json({ isLoggedIn: result.isLoggedIn});
+      res.json({ isLoggedIn: result.isLoggedIn });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -124,8 +135,10 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
          };
          if (i == 0) {
             newPiece.img = cloudResult.secure_url;
+            newPiece.cloudinary_id = cloudResult.public_id;
          } else {
             newDraft.img = cloudResult.secure_url;
+            newDraft.cloudinary_id = cloudResult.public_id;
             newPiece.drafts.push(newDraft);
          }
       }
@@ -136,9 +149,10 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
       const result = await pieces.save();
       res.send(result);
    } catch (error) {
-      res.status(400).json({ 
+      res.status(400).json({
          success: false,
-         message: error.message });
+         message: error.message,
+      });
    }
 });
 
@@ -182,7 +196,7 @@ router.delete('/deleteprofile/:id', async (req, res) => {
    try {
       const id = req.params.id;
       const data = await Model.findByIdAndDelete(id);
-      res.send(`Document with ${data.name} has been deleted..`);
+      res.send(`${data.name}'s profile has been deleted...`);
    } catch (error) {
       res.status(400).json({ message: error.message });
    }
@@ -192,14 +206,51 @@ router.delete('/deleteprofile/:id', async (req, res) => {
 router.patch('/deletepiece/:id/:id2', async (req, res) => {
    try {
       const userId = req.params.id;
-      const pieceId = '"' + req.params.id2 + '"';
+      const pieceIdString = '"' + req.params.id2 + '"';
+      const pieceId = req.params.id2;
 
       const data = await Model.findById(userId);
 
+      for (i = 0; i < data.pieces.length; i++) {
+
+         console.log('first thing: ' + data.pieces[i]._id +'last thing: ' + pieceIdString);
+
+         if (JSON.stringify(data.pieces[i]._id) == pieceIdString) {
+            console.log('main img id: ' + data.pieces[i].cloudinary_id);
+            await cloudinary.uploader.destroy(
+               data.pieces[i].cloudinary_id,
+               function (result) {
+                  console.log('main result : ' +result);
+               }
+            );
+
+            for (x = 0; x < data.pieces[i].drafts.length; x++) {
+               console.log(
+                  'draft ' +
+                     i +
+                     ' img id: ' +
+                     data.pieces[i].drafts[x].cloudinary_id
+               );
+               await cloudinary.uploader.destroy(
+                  data.pieces[i].drafts[x].cloudinary_id,
+                  function (result) {
+                     console.log('draft result '+x+ ': ' +result);
+                  }
+               );
+
+            }
+
+         }
+
+      }
+
+      console.log('pieces before: ' +data.pieces);
 
       data.pieces = data.pieces.filter(
-         (item) => JSON.stringify(item._id) != pieceId
+         (item) => JSON.stringify(item._id) != pieceIdString
       );
+
+      console.log('pieces after: ' +data.pieces);
 
       const result = await data.save();
       res.send(result);

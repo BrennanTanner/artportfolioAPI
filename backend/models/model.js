@@ -73,12 +73,17 @@ const artistSchema = mongoose.Schema({
             required: true,
             type: String,
          },
+         cloudinary_id: {
+            type: String,
+         },
          drafts: [
             {
                img: {
                   type: String,
                },
-
+               cloudinary_id: {
+                  type: String,
+               },
             },
          ],
       },
