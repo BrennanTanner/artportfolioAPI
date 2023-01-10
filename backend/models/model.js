@@ -59,7 +59,6 @@ const artistSchema = mongoose.Schema({
             type: String,
          },
          aboutBody: {
-            required: true,
             type: String,
          },
          medium: {
