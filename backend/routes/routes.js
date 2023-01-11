@@ -177,13 +177,87 @@ router.get('/get/:id', async (req, res) => {
 });
 
 //Update by ID Method
-router.patch('/update/:id', async (req, res) => {
+
+router.patch('/update/:id', upload.array('image', 6), async (req, res) => {
    try {
       const id = req.params.id;
-      const updatedData = req.body;
-      const options = { new: true };
+      const oldPiece = req.body;
 
-      const result = await Model.findByIdAndUpdate(id, updatedData, options);
+      const pieceImages = {
+         img: '',
+         drafts: [],
+      };
+
+      const newPiece = { ...oldPiece, ...pieceImages };
+
+      var newDraft = {
+         img: '',
+      };
+
+      // Upload image to cloudinary
+
+      for (var i = 0; i < req.files.length; i++) {
+         var localFilePath = req.files[i].path;
+         const cloudResult = await cloudinary.uploader.upload(localFilePath);
+         var newDraft = {
+            img: '',
+         };
+         if (i == 0) {
+            newPiece.img = cloudResult.secure_url;
+            newPiece.cloudinary_id = cloudResult.public_id;
+         } else {
+            newDraft.img = cloudResult.secure_url;
+            newDraft.cloudinary_id = cloudResult.public_id;
+            newPiece.drafts.push(newDraft);
+         }
+      }
+
+      const pieces = await Model.findById(id);
+
+      pieces.pieces.push(newPiece);
+      const result = await pieces.save();
+      res.send(result);
+   } catch (error) {
+      res.status(400).json({
+         success: false,
+         message: error.message,
+      });
+   }
+});
+
+// router.patch('/update/:id', async (req, res) => {
+//    try {
+//       const id = req.params.id;
+//       const updatedData = req.body;
+//       const options = { new: true };
+
+//       const result = await Model.findByIdAndUpdate(id, updatedData, options);
+
+//       res.send(result);
+//    } catch (error) {
+//       res.status(400).json({ message: error.message });
+//    }
+// });
+
+router.patch('/updatecovers/:id/:id2', async (req, res) => {
+   try {
+      const userId = req.params.id;
+      const pieceId = req.params.id2;
+
+      const user = await Model.findById(userId);
+
+
+      for (let i = 0; i < user.pieces.length; i++){
+         if (user.pieces[i]._id != pieceId){
+            console.log("_id: "+user.pieces[i]._id);
+            console.log("sent id: "+pieceId);
+            user.pieces[i].isCover = false;
+         } else{
+            console.log(true);
+            user.pieces[i].isCover = true;
+         }
+      }
+      const result = await user.save();
 
       res.send(result);
    } catch (error) {
@@ -192,22 +266,22 @@ router.patch('/update/:id', async (req, res) => {
 });
 
 //Delete user by ID Method
-router.delete('/deleteprofile/:id', async (req, res) => {
-   try {
-      const id = req.params.id;
-      const data = await Model.findByIdAndDelete(id);
-      res.send(`${data.name}'s profile has been deleted...`);
-   } catch (error) {
-      res.status(400).json({ message: error.message });
-   }
-});
+// router.delete('/deleteprofile/:id', async (req, res) => {
+//    try {
+//       const id = req.params.id;
+//       const data = await Model.findByIdAndDelete(id);
+//       res.send(`${data.name}'s profile has been deleted...`);
+//    } catch (error) {
+//       res.status(400).json({ message: error.message });
+//    }
+// });
 
 //Delete piece by ID Method
 router.patch('/deletepiece/:id/:id2', async (req, res) => {
    try {
       const userId = req.params.id;
       const pieceIdString = '"' + req.params.id2 + '"';
-      const pieceId = req.params.id2;
+      
 
       const data = await Model.findById(userId);
 

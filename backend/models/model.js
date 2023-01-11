@@ -69,6 +69,10 @@ const artistSchema = mongoose.Schema({
             required: true,
             type: String,
          },
+         isCover: {
+            required: true,
+            type: String,
+         },
          img: {
             required: true,
             type: String,
