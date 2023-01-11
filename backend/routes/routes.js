@@ -257,7 +257,6 @@ router.patch('/updatecovers/:id/:id2', async (req, res) => {
          if (user.pieces[i]._id != pieceId && user.pieces[i].medium == tag){
             user.pieces[i].isCover = false;
          } else{
-            console.log(true);
             user.pieces[i].isCover = true;
          }
       }
@@ -291,10 +290,7 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
 
       for (i = 0; i < data.pieces.length; i++) {
 
-         console.log('first thing: ' + data.pieces[i]._id +'last thing: ' + pieceIdString);
-
          if (JSON.stringify(data.pieces[i]._id) == pieceIdString) {
-            console.log('main img id: ' + data.pieces[i].cloudinary_id);
             await cloudinary.uploader.destroy(
                data.pieces[i].cloudinary_id,
                function (result) {
@@ -322,13 +318,9 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
 
       }
 
-      console.log('pieces before: ' +data.pieces);
-
       data.pieces = data.pieces.filter(
          (item) => JSON.stringify(item._id) != pieceIdString
       );
-
-      console.log('pieces after: ' +data.pieces);
 
       const result = await data.save();
       res.send(result);
