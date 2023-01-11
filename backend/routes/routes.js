@@ -247,16 +247,17 @@ router.patch('/updatecovers/:id/:id2', async (req, res) => {
       const user = await Model.findById(userId);
       const piece = await Model.findById(pieceId);
 
-      for (let i = 0; i < user.pieces.length; i++){
-         if (user.pieces[i]._id == pieceId){
-            tag = user.pieces[i].medium
+      for (let i = 0; i < user.pieces.length; i++) {
+         if (user.pieces[i]._id == pieceId) {
+            tag = user.pieces[i].medium;
          }
       }
 
-      for (let i = 0; i < user.pieces.length; i++){
-         if (user.pieces[i]._id != pieceId && user.pieces[i].medium == tag){
+      for (let i = 0; i < user.pieces.length; i++) {
+         if (user.pieces[i]._id != pieceId) {
             user.pieces[i].isCover = false;
-         } else{
+         } else if (user.pieces[i].medium != tag) {
+         } else {
             user.pieces[i].isCover = true;
          }
       }
@@ -284,17 +285,15 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
    try {
       const userId = req.params.id;
       const pieceIdString = '"' + req.params.id2 + '"';
-      
 
       const data = await Model.findById(userId);
 
       for (i = 0; i < data.pieces.length; i++) {
-
          if (JSON.stringify(data.pieces[i]._id) == pieceIdString) {
             await cloudinary.uploader.destroy(
                data.pieces[i].cloudinary_id,
                function (result) {
-                  console.log('main result : ' +result);
+                  console.log('main result : ' + result);
                }
             );
 
@@ -308,14 +307,11 @@ router.patch('/deletepiece/:id/:id2', async (req, res) => {
                await cloudinary.uploader.destroy(
                   data.pieces[i].drafts[x].cloudinary_id,
                   function (result) {
-                     console.log('draft result '+x+ ': ' +result);
+                     console.log('draft result ' + x + ': ' + result);
                   }
                );
-
             }
-
          }
-
       }
 
       data.pieces = data.pieces.filter(
