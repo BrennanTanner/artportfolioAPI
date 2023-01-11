@@ -243,14 +243,18 @@ router.patch('/updatecovers/:id/:id2', async (req, res) => {
    try {
       const userId = req.params.id;
       const pieceId = req.params.id2;
-
+      let tag = '';
       const user = await Model.findById(userId);
-
+      const piece = await Model.findById(pieceId);
 
       for (let i = 0; i < user.pieces.length; i++){
-         if (user.pieces[i]._id != pieceId){
-            console.log("_id: "+user.pieces[i]._id);
-            console.log("sent id: "+pieceId);
+         if (user.pieces[i]._id == pieceId){
+            tag = user.pieces[i].medium
+         }
+      }
+
+      for (let i = 0; i < user.pieces.length; i++){
+         if (user.pieces[i]._id != pieceId && user.pieces[i].medium == tag){
             user.pieces[i].isCover = false;
          } else{
             console.log(true);
