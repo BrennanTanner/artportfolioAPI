@@ -254,12 +254,13 @@ router.patch('/updatecovers/:id/:id2', async (req, res) => {
       }
 
       for (let i = 0; i < user.pieces.length; i++) {
+         if (user.pieces[i].medium == tag) {
          if (user.pieces[i]._id != pieceId) {
             user.pieces[i].isCover = false;
-         } else if (user.pieces[i].medium != tag) {
          } else {
             user.pieces[i].isCover = true;
          }
+      }
       }
       const result = await user.save();
 
