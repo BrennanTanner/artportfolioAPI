@@ -156,15 +156,15 @@ router.patch('/newpiece/:id', upload.array('image', 6), async (req, res) => {
    }
 });
 
-//Get all Method
-// router.get('/getAll', async (req, res) => {
-//    try {
-//       const data = await Model.find();
-//       res.json(data);
-//    } catch (error) {
-//       res.status(500).json({ message: error.message });
-//    }
-// });
+// Get all Method
+router.get('/getAll', async (req, res) => {
+   try {
+      const data = await Model.find();
+      res.json(data);
+   } catch (error) {
+      res.status(500).json({ message: error.message });
+   }
+});
 
 //Get by ID Method
 router.get('/get/:id', async (req, res) => {
@@ -177,18 +177,20 @@ router.get('/get/:id', async (req, res) => {
 });
 
 //Update by ID Method
+//rudimentary, needs looking at
 
-router.patch('/update/:id', upload.array('image', 6), async (req, res) => {
+router.patch('/update/:id/:id2', upload.array('image', 6), async (req, res) => {
    try {
-      const id = req.params.id;
-      const oldPiece = req.body;
+      const userId = req.params.id;
+      const pieceId = req.params.id2;
+      const newInfo = req.body;
 
       const pieceImages = {
          img: '',
          drafts: [],
       };
 
-      const newPiece = { ...oldPiece, ...pieceImages };
+      const newPiece = { ...newInfo, ...pieceImages };
 
       var newDraft = {
          img: '',
@@ -212,10 +214,45 @@ router.patch('/update/:id', upload.array('image', 6), async (req, res) => {
          }
       }
 
-      const pieces = await Model.findById(id);
+      const user = await Model.findById(userId);
 
-      pieces.pieces.push(newPiece);
-      const result = await pieces.save();
+      user.pieces.forEach((piece, i) => {
+         if (piece._id == pieceId){
+
+            console.log("piece before: ");
+            console.log(newPiece.drafts);
+      
+            if (newPiece.title){
+               piece.title = newPiece.title;
+            }
+            if (newPiece.aboutBody){
+               piece.aboutBody = newPiece.aboutBody;
+            }
+            if (newPiece.medium){
+               piece.medium = newPiece.medium;
+            }
+            if (newPiece.isFavorite){
+               piece.isFavorite = newPiece.isFavorite;
+            }
+            if (newPiece.isCover){
+               piece.isCover = newPiece.isCover;
+            }
+            if (newPiece.img){
+               piece.img = newPiece.img;
+            }
+            if (newPiece.cloudinary_id){
+               piece.cloudinary_id = newPiece.cloudinary_id;
+            }
+            if (newPiece.drafts.length != 0){
+               piece.drafts = newPiece.drafts;
+            }
+
+            console.log("piece after: ");
+            console.log(user.pieces[i]);
+         }
+      });
+
+      const result = await user.save();
       res.send(result);
    } catch (error) {
       res.status(400).json({
